@@ -1,0 +1,332 @@
+﻿/*productos*/
+#container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+/* Estilo para la card fija */
+#card {
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 290px; /* Ancho fijo */
+    height: 300px; /* Altura fija */
+}
+
+    /* Efecto hover */
+    #card:hover {
+        transform: scale(1.05);
+        filter: drop-shadow(0px 0px 12px grey);
+    }
+
+    /* La imagen se ajusta sin recorte y ocupa la parte superior */
+    #card img {
+        margin-top: 15px;
+        border-radius:20%;
+        width: 90%; /* Se reduce un poco el ancho para dejar márgenes internos */
+        height: 150px; /* Altura fija para la imagen */
+        object-fit: contain; /* Evita que se recorte la imagen */
+        background-color: transparent;
+    }
+
+/* Contenedor del contenido textual */
+#card-content {
+    padding: 5px;
+    text-align: center;
+    flex: 1; /* Ocupa el espacio restante de la card */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente el contenido */
+}
+
+    /* Estilos para el título */
+    #card-content h3 {
+        margin-bottom: 10px;
+        color: white;
+        font-size: 16px;
+        line-height: 1.2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; /* Si el título es muy largo se recorta y añade "..." */
+    }
+
+    /* Estilos para el párrafo descriptivo */
+    #card-content p {
+        font-size: 14px;
+        color: white;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Limita a 2 líneas */
+        -webkit-box-orient: vertical;
+    }
+
+
+#btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+    #btn:hover {
+        background: #0056b3;
+    }
+
+@media (max-width: 1024px) {
+    #container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    #container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@keyframes borderGlow {
+    0% {
+        border-color: #ff5733;
+    }
+    /* Naranja */
+    25% {
+        border-color: #ff33a6;
+    }
+    /* Rosa */
+    50% {
+        border-color: #33ff57;
+    }
+    /* Verde */
+    75% {
+        border-color: #33a6ff;
+    }
+    /* Azul */
+    100% {
+        border-color: #ff5733;
+    }
+}
+
+
+
+
+/* Animación del borde de colores */
+@keyframes borderGlowBtn {
+    0% {
+        border-color: transparent; /* Naranja */
+    }
+
+    25% {
+        border-color: white; /* Azul */
+    }
+
+    50% {
+        border-color: transparent; /* Verde */
+    }
+
+    75% {
+        border-color: white; /* Rosa */
+    }
+
+    100% {
+        border-color: transparent; /* Naranja */
+    }
+}
+
+
+
+
+
+
+#imgModal {
+    background-color: rgba(255, 255, 255, 0.6); /* Blanco semi-transparente */
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Hace la imagen circular */
+    object-fit: cover; /* Ajusta la imagen sin distorsión */
+    border: 3px solid white; /* Borde blanco */
+    display: block;
+    margin: 0 auto;
+    transition: background-color 0.3s ease-in-out; /* Efecto suave */
+}
+
+    #imgModal:hover {
+        background-color: rgba(255, 255, 255, 1); /* Se vuelve blanco al pasar el mouse */
+    }
+
+.modal-header {
+    height: 50px;
+    text-align: center;
+}
+
+.card {
+    flex: 0 0 250px;
+    background-color: transparent;
+    padding: 12px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+}
+
+    .card img {
+        padding: 12px;
+        background-color: transparent;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 30px;
+        border: 2px solid #111111;
+        animation: borderAnimation 2s infinite linear;
+    }
+
+    .card:hover {
+        transform: scale(1.1);
+        background-color: transparent;
+        border-radius: 30px;
+        filter: drop-shadow(0px 0px 12px grey)
+    }
+/*shell para buscar producto*/
+/* Contenedor principal */
+#headerContainer {
+    display: flex;
+    align-items: center; /* Alinear verticalmente */
+    justify-content: center; /* Centrar elementos horizontalmente */
+    width: 100%;
+    padding: 20px;
+    position: relative;
+}
+
+/* Estilo del título */
+#tlCategorias {
+    font-size: 24px;
+    color: white;
+    margin: 0 auto; /* Centrar automáticamente */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Centrar exactamente en la mitad */
+}
+
+/* Contenedor de la barra de búsqueda */
+#contensearch {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Mueve la barra de búsqueda a la derecha */
+}
+
+/* Campo de texto */
+#searchInput {
+    width: 300px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px 0 0 20px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Botón de búsqueda */
+#searchBtn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    #searchBtn:hover {
+        background-color: #0056b3;
+    }
+
+
+
+#tlCamaras {
+    margin-left: 80px;
+    color: white;
+}
+/*carrusel*/
+@keyframes borderGlow {
+    0% {
+        border-color: #ff5733;
+    }
+    /* Naranja */
+    25% {
+        border-color: #ff33a6;
+    }
+    /* Rosa */
+    50% {
+        border-color: #33ff57;
+    }
+    /* Verde */
+    75% {
+        border-color: #33a6ff;
+    }
+    /* Azul */
+    100% {
+        border-color: #ff5733;
+    }
+}
+
+
+
+
+/* Animación del borde de colores */
+@keyframes borderGlowBtn {
+    0% {
+        border-color: transparent; /* Naranja */
+    }
+
+    25% {
+        border-color: white; /* Azul */
+    }
+
+    50% {
+        border-color: transparent; /* Verde */
+    }
+
+    75% {
+        border-color: white; /* Rosa */
+    }
+
+    100% {
+        border-color: transparent; /* Naranja */
+    }
+}
+
+
+
+
+
+
+#imgModal {
+    background-color: rgba(255, 255, 255, 0.6); /* Blanco semi-transparente */
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Hace la imagen circular */
+    object-fit: cover; /* Ajusta la imagen sin distorsión */
+    border: 3px solid white; /* Borde blanco */
+    display: block;
+    margin: 0 auto;
+    transition: background-color 0.3s ease-in-out; /* Efecto suave */
+}
+
+    #imgModal:hover {
+        background-color: rgba(255, 255, 255, 1); /* Se vuelve blanco al pasar el mouse */
+    }
+
+.modal-header {
+    height: 50px;
+    text-align: center;
+}

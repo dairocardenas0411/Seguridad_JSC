@@ -1,0 +1,65 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\vista\\usuariocotizacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\usuariocotizacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\vista\\usuariocotizacion.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\usuariocotizacion.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 379,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UsuarioCotizacion.aspx",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\UsuarioCotizacion.aspx",
+              "RelativeDocumentMoniker": "Vista\\UsuarioCotizacion.aspx",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\UsuarioCotizacion.aspx",
+              "RelativeToolTip": "Vista\\UsuarioCotizacion.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-05-18T18:41:29.512Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UsuarioCotizacion.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\UsuarioCotizacion.aspx.cs",
+              "RelativeDocumentMoniker": "Vista\\UsuarioCotizacion.aspx.cs",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\UsuarioCotizacion.aspx.cs",
+              "RelativeToolTip": "Vista\\UsuarioCotizacion.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-18T18:38:59.024Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

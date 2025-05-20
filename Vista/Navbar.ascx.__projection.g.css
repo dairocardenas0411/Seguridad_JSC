@@ -1,0 +1,184 @@
+
+/* BEGIN EXTERNAL SOURCE */
+
+    #togglePassword {
+        border: none;
+    }
+
+        #togglePassword i {
+            color: white !important; /* Icono blanco */
+            font-size: 1.2rem; /* Tamaño del icono */
+        }
+
+
+    /* ?? Modal ultra-transparente con borde animado */
+    .modal-content {
+        background: rgba(300, 300, 300, 0.1); /* Fondo más transparente */
+        backdrop-filter: blur(10px); /* Efecto de desenfoque */
+        color: #fff; /* Texto blanco */
+        border-radius: 12px; /* Bordes redondeados */
+        padding: 20px;
+        position: relative;
+        border: 3px solid transparent; /* Borde inicial */
+        animation: borderGlow 1s infinite linear;
+        filter: drop-shadow(0px 0px 12px grey)
+    }
+
+    .btn-close {
+        background-color: white;
+        color: white; /* Hace el icono blanco */
+    }
+
+
+    @keyframes borderGlow {
+        0% {
+            border-color: #ff5733;
+        }
+        /* Naranja */
+        25% {
+            border-color: #ff33a6;
+        }
+        /* Rosa */
+        50% {
+            border-color: #33ff57;
+        }
+        /* Verde */
+        75% {
+            border-color: #33a6ff;
+        }
+        /* Azul */
+        100% {
+            border-color: #ff5733;
+        }
+    }
+
+    #h2Login {
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+    }
+
+    #btnLogin {
+        background: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente */
+        display: block;
+        margin: 0 auto;
+        color: white; /* Texto blanco */
+        padding: 10px 20px;
+        border: 3px solid transparent; /* Borde inicial transparente */
+        border-radius: 8px; /* Bordes redondeados */
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        animation: borderGlowBtn 2s infinite linear;
+    }
+
+        #btnLogin:hover {
+            background: rgba(255, 255, 255, 0.9); /* Se vuelve blanco */
+            color: black; /* Texto negro */
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.8); /* Efecto de brillo */
+        }
+
+        #btnLogin:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.8); /* Efecto de brillo azul al hacer clic */
+        }
+
+    /* Animación del borde de colores */
+    @keyframes borderGlowBtn {
+        0% {
+            border-color: transparent; /* Naranja */
+        }
+
+        25% {
+            border-color: white; /* Azul */
+        }
+
+        50% {
+            border-color: transparent; /* Verde */
+        }
+
+        75% {
+            border-color: white; /* Rosa */
+        }
+
+        100% {
+            border-color: transparent; /* Naranja */
+        }
+    }
+
+    #txtUsuario {
+        background-color: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente */
+        color: white; /* Texto blanco */
+        border: 2px solid transparent; /* Borde inicial transparente */
+        padding: 8px;
+        border-radius: 12px;
+        outline: none;
+        transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    #txtPassword {
+        background-color: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente */
+        color: white; /* Texto blanco */
+        border: 2px solid transparent; /* Borde inicial transparente */
+        padding: 8px;
+        border-radius: 12px;
+        outline: none;
+        transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    #txtUsuario::placeholder {
+        color: white; /* Placeholder blanco */
+        opacity: 1; /* Asegura que se vea completamente */
+    }
+
+    #txtPassword::placeholder {
+        color: white; /* Placeholder blanco */
+        opacity: 1; /* Asegura que se vea completamente */
+    }
+
+
+    #txtUsuario:hover {
+        color: black; /* Texto negro */
+    }
+
+    #txtPassword:hover {
+        color: black; /* Texto negro */
+    }
+
+    #txtUsuario:focus {
+        background-color: rgba(255, 255, 255, 0.9); /* Más blanco al escribir */
+        color: black; /* Texto negro */
+        border-color: #007bff; /* Azul llamativo */
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.8); /* Brillo azul alrededor */
+    }
+
+    #txtPassword:focus {
+        background-color: rgba(255, 255, 255, 0.9); /* Más blanco al escribir */
+        color: black; /* Texto negro */
+        border-color: #007bff; /* Azul llamativo */
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.8); /* Brillo azul alrededor */
+    }
+
+
+    #imgModal {
+        background-color: rgba(255, 255, 255, 0.6); /* Blanco semi-transparente */
+        width: 120px;
+        height: 120px;
+        border-radius: 50%; /* Hace la imagen circular */
+        object-fit: cover; /* Ajusta la imagen sin distorsión */
+        border: 3px solid white; /* Borde blanco */
+        display: block;
+        margin: 0 auto;
+        transition: background-color 0.3s ease-in-out; /* Efecto suave */
+    }
+
+        #imgModal:hover {
+            background-color: rgba(255, 255, 255, 1); /* Se vuelve blanco al pasar el mouse */
+        }
+
+    .modal-header {
+        height: 50px;
+        text-align: center;
+    }
+
+/* END EXTERNAL SOURCE */

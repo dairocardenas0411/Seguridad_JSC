@@ -1,0 +1,40 @@
+﻿
+.body {
+    background: linear-gradient(to right, #111111,#124247);
+}
+/* Botón para activar el menú */
+
+.menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+/* Menú lateral */
+.menu {
+    position: fixed;
+    top: 0;
+    left: -260px; /* Oculto por defecto */
+    width: 250px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    transition: left 0.3s ease-in-out;
+    padding-top: 60px;
+}
+
+    /* Clase que muestra el menú */
+    .menu.active {
+        left: 0;
+    }

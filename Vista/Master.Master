@@ -1,0 +1,85 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="Seguridad_JSC.Vista.Master" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>Panel - Seguridad JSC</title>
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="..\Vista\css\Master.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <div class="sidebar-heading">
+                    <div class="logo-container">
+                        <img src="../Vista/Recursos/icon1.png" alt="Seguridad JSC">
+                    </div>
+                </div>
+
+
+                <div class="list-group list-group-flush">
+                    <a href="inicio.aspx" class="list-group-item"><i class="fas fa-home mr-2"></i>Inicio</a>
+                    <a id="menuProductos" href="admin.aspx" class="list-group-item" style="display: none;"><i class="fas fa-camera mr-2"></i>Productos</a>
+                    <a id="menuEmpleados" href="empleados.aspx" class="list-group-item" style="display: none;"><i class="fas fa-users-cog mr-2"></i>Empleados</a>
+                    <a id="menuCotizaciones" href="ListaCotizaciones.aspx" class="list-group-item" style="display: none;"><i class="fas fa-chart-line mr-2"></i>Reportes</a>
+                    <a id="menuInstalaciones" href="instalaciones.aspx" class="list-group-item" style="display: none;"><i class="fas fa-tools mr-2"></i>Instalaciones</a>
+                    <a id="menuPedidos" href="pedidos.aspx" class="list-group-item" style="display: none;"><i class="fas fa-shopping-cart mr-2"></i>Pedidos</a>
+                    <asp:Button ID="btncerrarSession" runat="server" CssClass="btn btn-danger mt-4" Text="Cerrar Sesión" OnClick="btncerrarSession_Click" />
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <nav class="navbar navbar-expand-lg">
+                    <div class="ml-auto d-flex align-items-center">
+                        <span class="navbar-text mr-3">
+                            <asp:Label ID="LblidUsuario" runat="server" Text="Invitado" Visible="false"></asp:Label>
+                            <asp:Label ID="lblnombresApellidos" Style="color: white" runat="server" Text="Invitado"></asp:Label>
+                        </span>
+                        <img src="../Vista/Recursos/user.png" class="img-profile rounded-circle" width="45" />
+                    </div>
+                </nav>
+
+                <div class="container-fluid mt-3">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Script para controlar el menú por rol -->
+    <script>
+        var userRole = '<%= Session["idRol"] %>';
+
+        function showMenuBasedOnRole() {
+            switch (userRole) {
+                case '1': // ADMIN
+                    document.getElementById('menuProductos').style.display = 'block';
+                    document.getElementById('menuEmpleados').style.display = 'block';
+                    document.getElementById('menuCotizaciones').style.display = 'block';
+                    break;
+                case '2': // TÉCNICO
+                    document.getElementById('menuInstalaciones').style.display = 'block';
+                    break;
+                case '3': // VENDEDOR
+                    document.getElementById('menuPedidos').style.display = 'block';
+                    break;
+                default:
+                    window.location.href = "../index.aspx";
+                    break;
+            }
+        }
+
+        window.onload = showMenuBasedOnRole;
+    </script>
+</body>
+</html>

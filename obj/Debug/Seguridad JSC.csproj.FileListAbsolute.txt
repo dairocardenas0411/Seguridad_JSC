@@ -1,0 +1,41 @@
+C:\Users\dairo\source\repos\Seguridad JSC\bin\Seguridad JSC.dll.config
+C:\Users\dairo\source\repos\Seguridad JSC\bin\Seguridad JSC.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\Seguridad JSC.pdb
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\csc.exe
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\csc.exe.config
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\csc.rsp
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\csi.exe
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\csi.exe.config
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\csi.rsp
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\System.Buffers.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\System.Memory.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\System.Numerics.Vectors.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\vbc.exe
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\vbc.exe.config
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\vbc.rsp
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\VBCSCompiler.exe
+C:\Users\dairo\source\repos\Seguridad JSC\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\dairo\source\repos\Seguridad JSC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\dairo\source\repos\Seguridad JSC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\dairo\source\repos\Seguridad JSC\obj\Debug\Seguridad JSC.csproj.AssemblyReference.cache
+C:\Users\dairo\source\repos\Seguridad JSC\obj\Debug\Seguridad JSC.csproj.CoreCompileInputs.cache
+C:\Users\dairo\source\repos\Seguridad JSC\obj\Debug\Segurida.A7E6369E.Up2Date
+C:\Users\dairo\source\repos\Seguridad JSC\obj\Debug\Seguridad JSC.dll
+C:\Users\dairo\source\repos\Seguridad JSC\obj\Debug\Seguridad JSC.pdb

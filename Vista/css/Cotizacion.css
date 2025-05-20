@@ -1,0 +1,78 @@
+﻿/* Contenedor del formulario en dos columnas */
+#formContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Estilo de grupos de entrada */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo general de labels */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Estilo general de inputs, selects y textarea */
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo para textarea expandido a ambas columnas */
+#containerObservaciones {
+    grid-column: span 2;
+}
+
+/* Contenedor del botón, centrado */
+#DivRegistroCotizacion {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/* Botón llamativo personalizado */
+.registro-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    width: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.registro-btn:hover {
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+.registro-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
