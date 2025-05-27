@@ -16,6 +16,14 @@ namespace Seguridad_JSC.Vista
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["idUsuario"] != null && Session["idRol"] != null)
+            {
+                LblidUsuario.Text = Session["idUsuario"].ToString();
+            }
+            else
+            {
+                Response.Redirect("index.aspx");
+            }
             if (!IsPostBack)
             {
                 if (Request.QueryString["idCotizacion"] != null)
@@ -39,7 +47,7 @@ namespace Seguridad_JSC.Vista
                 }
             }
         }
-      
+
         private void LlenarDatosModal(DataRow row)
         {
             hfIdTrabajo.Value = row["idCotizacion"].ToString();
@@ -52,7 +60,7 @@ namespace Seguridad_JSC.Vista
             // ... resto de campos del modal
 
             // Manejar DropDownLists
-            string tecnicoId = row["idusuario"].ToString();
+            string tecnicoId = row["idTecnico"].ToString();
             if (!string.IsNullOrEmpty(tecnicoId) && ddlTecnico.Items.FindByValue(tecnicoId) != null)
             {
                 ddlTecnico.SelectedValue = tecnicoId;
@@ -65,7 +73,7 @@ namespace Seguridad_JSC.Vista
             if (decimal.TryParse(row["cargosAdicionales"].ToString(), out decimal cargosAdicionales))
                 txtCargosAdicionales.Text = cargosAdicionales.ToString("0.##");
         }
-    
+
         private void CargarTrabajo(int idCotizacion)
         {
             ClCotizacionL cotizacionLogica = new ClCotizacionL();
@@ -215,7 +223,7 @@ namespace Seguridad_JSC.Vista
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
                             "Swal.fire('¡Aceptada!', 'La cotización ha sido aceptada correctamente.', 'success');", true);
                         CargarTrabajo(idCotizacion);
-                        CargarDatosProducto(idCotizacion); 
+                        CargarDatosProducto(idCotizacion);
                     }
                     else
                     {
@@ -232,6 +240,13 @@ namespace Seguridad_JSC.Vista
         }
 
 
+        public bool EsTecnico
+        {
+            get
+            {
+                return Session["idRol"] != null && Session["idRol"].ToString() == "2";
+            }
+        }
 
         private bool AceptarCotizacion(int idCotizacion, out string errorStock)
         {
@@ -258,7 +273,7 @@ namespace Seguridad_JSC.Vista
 
                         errorStock = paramError.Value?.ToString();
 
-                        return string.IsNullOrEmpty(errorStock); 
+                        return string.IsNullOrEmpty(errorStock);
                     }
                 }
             }
@@ -343,7 +358,7 @@ namespace Seguridad_JSC.Vista
                 if (string.IsNullOrWhiteSpace(txtDireccion.Text))
                     throw new Exception("La dirección de instalación es obligatoria.");
 
-               
+
 
                 if (string.IsNullOrWhiteSpace(txtCantidad.Text) || !int.TryParse(txtCantidad.Text.Trim(), out int cantidad))
                     throw new Exception("La cantidad es obligatoria y debe ser un número entero.");
@@ -357,7 +372,7 @@ namespace Seguridad_JSC.Vista
                 if (string.IsNullOrWhiteSpace(txtCargosAdicionales.Text) || !decimal.TryParse(txtCargosAdicionales.Text.Trim(), out decimal cargosAdicionales))
                     throw new Exception("Debe ingresar un valor de cargos adicionales válido.");
 
-              
+
 
                 if (string.IsNullOrEmpty(ddlTecnico.SelectedValue) || string.IsNullOrEmpty(ddlListaProductos.SelectedValue))
                     throw new Exception("Debe seleccionar un técnico y un producto.");
@@ -376,17 +391,17 @@ namespace Seguridad_JSC.Vista
                 cotizacion.valorInstalacion = valorInstalacion;
                 cotizacion.cargosAdicionales = cargosAdicionales;
                 cotizacion.tipoTrabajo = ddlTipoTrabajo.SelectedValue;
-                cotizacion.observacionesTrabajo =txtObservacionesTecnico.Text.Trim();
+                cotizacion.observacionesTrabajo = txtObservacionesTecnico.Text.Trim();
                 cotizacion.idUsuarioT = Convert.ToInt32(ddlTecnico.SelectedValue);
                 cotizacion.idProducto = Convert.ToInt32(ddlListaProductos.SelectedValue);
 
-               
+
                 ClCotizacionL logica = new ClCotizacionL();
                 bool resultado = logica.MtdActualizarTrabajo(cotizacion);
 
                 if (resultado)
                 {
-                    string estado = cotizacion.estado; 
+                    string estado = cotizacion.estado;
 
                     if (estado == "Rechazada" || estado == "Completada")
                     {
@@ -397,7 +412,7 @@ namespace Seguridad_JSC.Vista
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "success",
                             "Swal.fire('Actualizado', 'Datos Actualizados correctamente', 'success');", true);
-                        CargarTrabajo(cotizacion.idCotizacion); 
+                        CargarTrabajo(cotizacion.idCotizacion);
                     }
                 }
                 else

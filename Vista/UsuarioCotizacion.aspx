@@ -21,10 +21,10 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Mensaje de error -->
     <asp:Label ID="lblMensaje" Visible="false" runat="server" ForeColor="Red" CssClass="mensaje-error"></asp:Label>
+    <asp:Label ID="LblidUsuario" runat="server" Text="Label" Visible="false"></asp:Label>
 
-    <!-- Botones de acción -->
+
     <div class="btn-container no-print" style="margin-bottom: 20px;">
         <asp:Repeater ID="rptBtn" runat="server">
             <ItemTemplate>
@@ -35,12 +35,13 @@
                     CssClass="btn-acpetar"
                     CommandArgument='<%# Eval("idCotizacion") %>'
                     OnCommand="btnAceptar_Command"
-                    Visible='<%# Eval("estado").ToString() == "Pendiente" %>' />
+                    Visible='<%# Eval("estado").ToString() == "Pendiente" && !EsTecnico %>' />
 
 
                 <asp:Button ID="bntEliminar" runat="server" Text="🗑 Eliminar"
                     CssClass="btn-eliminar" CommandName="Eliminar"
-                    CommandArgument='<%# Eval("idCotizacion") %>' OnCommand="btnEliminar_Command" />
+                    CommandArgument='<%# Eval("idCotizacion") %>' OnCommand="btnEliminar_Command"
+                    Visible='<%# !EsTecnico %>' />
 
                 <asp:Button ID="btnImprimir" runat="server" Text="🖨️ Imprimir"
                     CssClass="btn-imprimir" OnClientClick="imprimirSeccion(); return false;" />
@@ -48,15 +49,13 @@
                 <asp:Button ID="btnAbrirModal" runat="server" Text="💱Actualizar Datos"
                     CssClass="btn-actualizar"
                     CommandArgument='<%# Eval("idCotizacion") %>'
-                    OnCommand="btnAbrirModal_Command" />
+                    OnCommand="btnAbrirModal_Command" Visible='<%# !EsTecnico %>' />
             </ItemTemplate>
         </asp:Repeater>
     </div>
 
-    <!-- Área de impresión -->
     <div id="areaImprimir" class="cotizacion-wrapper">
 
-        <!-- SECCIÓN 1: INFORMACIÓN DEL CLIENTE -->
         <asp:Repeater ID="rptDatosCotizacion" runat="server">
             <ItemTemplate>
                 <div class="card-cotizacion">
@@ -117,7 +116,6 @@
             </ItemTemplate>
         </asp:Repeater>
 
-        <!-- SECCIÓN 2: INFORMACIÓN DEL PRODUCTO -->
         <asp:Repeater ID="rptDatosProductos" runat="server">
             <ItemTemplate>
                 <div class="card-cotizacion">
@@ -155,7 +153,6 @@
                         </div>
                     </div>
 
-                    <!-- SUBSECCIÓN: INFORMACIÓN DEL PROVEEDOR (NO SE IMPRIME) -->
                     <div class="seccion-proveedor no-print">
                         <h4 class="subsection-title">
                             <i class="fas fa-user-cog"></i>Información del Proveedor
@@ -191,7 +188,6 @@
             </ItemTemplate>
         </asp:Repeater>
 
-        <!-- SECCIÓN 3: INFORMACIÓN DE INSTALACIÓN (NO SE IMPRIME) -->
         <asp:Repeater ID="rptDatosProveedor" runat="server">
             <ItemTemplate>
                 <div class="card-cotizacion no-print">
@@ -199,7 +195,6 @@
                         <i class="fas fa-tools"></i>Información de Instalación
                     </div>
 
-                    <!-- Técnico Asignado -->
                     <div class="bloque-seccion">
                         <h4 class="subsection-title">
                             <i class="fas fa-user-hard-hat"></i>Técnico Asignado
@@ -228,7 +223,6 @@
                         </div>
                     </div>
 
-                    <!-- Costos y Observaciones -->
                     <div class="bloque-seccion">
                         <h4 class="subsection-title">
                             <i class="fas fa-file-invoice-dollar"></i>Costos Adicionales
@@ -256,7 +250,6 @@
             </ItemTemplate>
         </asp:Repeater>
 
-        <!-- SECCIÓN 4: RESUMEN FINANCIERO -->
         <asp:Repeater ID="rptDatosCotizacion2" runat="server">
             <ItemTemplate>
                 <div class="card-cotizacion">
@@ -286,7 +279,6 @@
         </asp:Repeater>
     </div>
 
-    <!-- Modal Actualizar Cotización -->
     <div class="modal fade no-print" id="modalActualizar" tabindex="-1" aria-labelledby="modalActualizarLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -298,7 +290,6 @@
                 <div class="modal-body">
                     <asp:HiddenField ID="hfIdTrabajo" runat="server" />
 
-                    <!-- Información del Cliente -->
                     <h6 class="mb-3"><i class="fas fa-user"></i>Datos del Cliente</h6>
                     <div class="row g-3 mb-4">
                         <div class="col-md-6">
@@ -331,7 +322,6 @@
                         </div>
                     </div>
 
-                    <!-- Información del Producto -->
                     <h6 class="mb-3"><i class="fas fa-box"></i>Datos del Producto</h6>
                     <div class="row g-3 mb-4">
                         <div class="col-md-6">
@@ -357,7 +347,6 @@
                         </div>
                     </div>
 
-                    <!-- Información Financiera -->
                     <h6 class="mb-3"><i class="fas fa-dollar-sign"></i>Costos</h6>
                     <div class="row g-3 mb-4">
                         <div class="col-md-6">
@@ -396,7 +385,6 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <script src="..\Vista\js\JavaScript.js"></script>
 

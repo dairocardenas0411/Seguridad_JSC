@@ -34,7 +34,7 @@
                             <th>Nombre Cliente</th>
                             <th>Dirección</th>
                             <th>Telefono</th>
-                            <th>Producto</th>
+                            <th>Tipo Trabajo</th>
                             <th>Observaciones</th>
                             <th>Acción</th>
                         </tr>
@@ -46,9 +46,8 @@
                     <td><%# Eval("NombreCliente") %> <%# Eval("apellidoCliente") %></td>
                     <td><%# Eval("DireccionInstalacion") %></td>
                     <td><%# Eval("telefono") %></td>
-                    <td><%# Eval("nombreProducto") %></td>
+                    <td><%# Eval("TipoTrabajo") %></td>
 
-                    <!-- Campo editable para observacionesTrabajo -->
                     <td style="width: 400px;">
                         <asp:TextBox ID="txtObservacionTrabajo" runat="server"
                             Text='<%# Eval("observacionesTrabajo") %>'
@@ -60,10 +59,15 @@
 
 
                     <td>
+
+                        <asp:Button ID="btnVerCotizacion" runat="server" CssClass="btn-admin btn-ver" Text="Informacion"
+                            CommandArgument='<%# Eval("idCotizacion") %>' OnCommand="btnVerCotizacion_Command" />
+
                         <asp:Button ID="bntFinalizar" runat="server" Text="✅ Finalizar"
                             CssClass="btn-admin btn-Finalizar" CommandName="Finalizar"
                             CommandArgument='<%# Eval("idCotizacion") %>' OnClick="bntFinalizar_Click" />
 
+                        <span class="tooltip-text">Ver Detalles</span>
                         <asp:Button ID="btnObservacionesT" runat="server" Text="Guardar Observación"
                             CssClass="btn-admin btn-ver" CommandName="GuardarObservacion"
                             CommandArgument='<%# Eval("idCotizacion") %>' OnClick="btnObservacionesT_Click" />
@@ -75,7 +79,7 @@
         </table>
             </FooterTemplate>
         </asp:Repeater>
-      
+
         <div class="pagination-container">
             <asp:Button ID="btnPrev" runat="server" Text="« Anterior" OnClick="btnPrev_Click" CssClass="btn btn-outline-secondary btn-sm" />
             <asp:Label ID="lblPageInfo" runat="server" Text="" Style="margin: 0 15px;"></asp:Label>

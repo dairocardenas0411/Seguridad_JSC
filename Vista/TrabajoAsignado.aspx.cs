@@ -132,7 +132,11 @@ namespace Seguridad_JSC.Vista
             }
         }
 
-
+        protected void btnVerCotizacion_Command(object sender, CommandEventArgs e)
+        {
+            string idCotizacion = e.CommandArgument.ToString();
+            Response.Redirect("UsuarioCotizacion.aspx?idCotizacion=" + idCotizacion);
+        }
         protected void bntFinalizar_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;

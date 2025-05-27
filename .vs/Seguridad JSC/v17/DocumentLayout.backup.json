@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\vista\\usuariocotizacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\usuariocotizacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\vista\\trabajoasignado.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\trabajoasignado.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\vista\\trabajoasignado.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\trabajoasignado.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\vista\\usuariocotizacion.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\usuariocotizacion.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\vista\\usuariocotizacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\usuariocotizacion.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\datos\\clcotizaciond.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:datos\\clcotizaciond.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +30,22 @@
       "DocumentGroups": [
         {
           "DockedHeight": 379,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TrabajoAsignado.aspx",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\TrabajoAsignado.aspx",
+              "RelativeDocumentMoniker": "Vista\\TrabajoAsignado.aspx",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\TrabajoAsignado.aspx*",
+              "RelativeToolTip": "Vista\\TrabajoAsignado.aspx*",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-05-27T11:56:04.49Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -34,20 +60,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "TrabajoAsignado.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\TrabajoAsignado.aspx.cs",
+              "RelativeDocumentMoniker": "Vista\\TrabajoAsignado.aspx.cs",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\TrabajoAsignado.aspx.cs",
+              "RelativeToolTip": "Vista\\TrabajoAsignado.aspx.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T12:17:57.832Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClCotizacionD.cs",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Datos\\ClCotizacionD.cs",
+              "RelativeDocumentMoniker": "Datos\\ClCotizacionD.cs",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Datos\\ClCotizacionD.cs",
+              "RelativeToolTip": "Datos\\ClCotizacionD.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T11:49:17.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "UsuarioCotizacion.aspx.cs",
               "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\UsuarioCotizacion.aspx.cs",
               "RelativeDocumentMoniker": "Vista\\UsuarioCotizacion.aspx.cs",
               "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\UsuarioCotizacion.aspx.cs",
               "RelativeToolTip": "Vista\\UsuarioCotizacion.aspx.cs",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAowKEBAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPYAAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-26T23:27:27.519Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "UsuarioCotizacion.aspx",
               "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\UsuarioCotizacion.aspx",
               "RelativeDocumentMoniker": "Vista\\UsuarioCotizacion.aspx",
@@ -55,7 +107,8 @@
               "RelativeToolTip": "Vista\\UsuarioCotizacion.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2025-05-26T01:58:58.877Z"
+              "WhenOpened": "2025-05-26T01:58:58.877Z",
+              "EditorCaption": ""
             }
           ]
         }
