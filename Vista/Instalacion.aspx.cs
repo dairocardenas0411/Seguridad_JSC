@@ -7,13 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Seguridad_JSC.Vista
 {
-    public partial class TecnicoSeguridad_JSC : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+	public partial class Instalacion : System.Web.UI.Page
+	{
+		protected void Page_Load(object sender, EventArgs e)
+		{
 
-        }
-
-       
-    }
+		}
+	}
 }

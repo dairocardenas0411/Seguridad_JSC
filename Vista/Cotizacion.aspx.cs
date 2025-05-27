@@ -2,8 +2,8 @@
 using Seguridad_JSC.Logica;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -12,150 +12,187 @@ namespace Seguridad_JSC.Vista
     public partial class Cotizacion : System.Web.UI.Page
     {
         private readonly ClCotizacionL _CotizacionL = new ClCotizacionL();
+
+        private List<ProductoCotizacionTemp> ProductosSeleccionados
+        {
+            get
+            {
+                if (ViewState["ProductosSeleccionados"] == null)
+                    ViewState["ProductosSeleccionados"] = new List<ProductoCotizacionTemp>();
+                return (List<ProductoCotizacionTemp>)ViewState["ProductosSeleccionados"];
+            }
+            set => ViewState["ProductosSeleccionados"] = value;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 CargarProductos();
+                CargarGridProductos();
             }
-
         }
 
         private void CargarProductos()
         {
             try
             {
-                ClListaProductoL oListaProductoL = new ClListaProductoL();
-                List<ClProductoE> listaProducto = oListaProductoL.MtdListarProducto();
+                ClListaProductoL logicaProducto = new ClListaProductoL();
+                List<ClProductoE> lista = logicaProducto.MtdListarProducto();
 
-                if (listaProducto.Count > 0)
-                {
-                    ddlListaProductos.DataSource = listaProducto;
-                    ddlListaProductos.DataTextField = "nombreProducto";
-                    ddlListaProductos.DataValueField = "idProducto";
-                    ddlListaProductos.DataBind();
-                }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alertNoProductos",
-                       "Swal.fire('Sin datos', 'No se encontraron Productos disponibles.', 'info');", true);
-                }
-                ddlListaProductos.Items.Insert(0, new ListItem("--Seleccione un producto--", "0"));
-            } catch (Exception ex)
+                ddlListaProductos.DataSource = lista;
+                ddlListaProductos.DataTextField = "nombreProducto";
+                ddlListaProductos.DataValueField = "idProducto";
+                ddlListaProductos.DataBind();
+                ddlListaProductos.Items.Insert(0, new ListItem("-- Seleccione un producto --", "0"));
+            }
+            catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert", $"alert('Error al cargar las razas: {ex.Message}');", true);
+                MostrarAlerta("Error", "No se pudieron cargar los productos: " + ex.Message, "error");
+            }
+        }
+
+        protected void BtnAgregarProducto_Click(object sender, EventArgs e)
+        {
+            int idProducto = int.Parse(ddlListaProductos.SelectedValue);
+            string nombreProducto = ddlListaProductos.SelectedItem.Text;
+            if (idProducto == 0)
+            {
+                MostrarAlerta("Advertencia", "Seleccione un producto válido.", "warning");
+                return;
             }
 
+            if (!int.TryParse(TxtCantidad.Text, out int cantidad) || cantidad < 1)
+            {
+                MostrarAlerta("Advertencia", "Ingrese una cantidad válida.", "warning");
+                return;
+            }
+
+            var nuevo = new ProductoCotizacionTemp
+            {
+                IdProducto = idProducto,
+                NombreProducto = nombreProducto,
+                Cantidad = cantidad
+            };
+
+            ProductosSeleccionados.Add(nuevo);
+            CargarGridProductos();
+            TxtCantidad.Text = "1";
+            ddlListaProductos.SelectedIndex = 0;
+        }
+
+        protected void GridViewProductos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Eliminar")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                var lista = ProductosSeleccionados;
+                if (index >= 0 && index < lista.Count)
+                {
+                    lista.RemoveAt(index);
+                    ProductosSeleccionados = lista;
+                    CargarGridProductos();
+                }
+            }
+        }
+
+        private void CargarGridProductos()
+        {
+            GridViewProductos.DataSource = ProductosSeleccionados;
+            GridViewProductos.DataBind();
         }
 
         protected void BtnRegistrarCotizacion_Click(object sender, EventArgs e)
         {
+            // Validar que haya productos
+            if (ProductosSeleccionados == null || ProductosSeleccionados.Count == 0)
+            {
+                MostrarAlerta("Advertencia", "Debe agregar al menos un producto para cotizar.", "warning");
+                return;
+            }
+
+            // Validar campos obligatorios del cliente
+            if (string.IsNullOrWhiteSpace(TxtNombreCliente.Text) ||
+                string.IsNullOrWhiteSpace(TxtApellidoCliente.Text) ||
+                string.IsNullOrWhiteSpace(txtDocumento.Text) ||
+                string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                string.IsNullOrWhiteSpace(txtDireccion.Text))
+            {
+                MostrarAlerta("Advertencia", "Por favor complete todos los campos obligatorios.", "warning");
+                return;
+            }
+
             try
             {
-                string nombreCliente = TxtNombreCliente.Text.Trim();
-                string apellidoCliente = TxtApellidoCliente.Text.Trim();
-                string telefono = TxtTelefono.Text.Trim();
-                string documentoTexto = txtDocumento.Text.Trim();
-                string email = txtEmail.Text.Trim();
-                string direccionInstalacion = txtDireccion.Text.Trim();
-                string cantidadTexto = TxtCantidad.Text.Trim();
-                string observaciones = TxtObservaciones.Text.Trim();
-
-                // Validaciones de campos obligatorios
-                if (string.IsNullOrWhiteSpace(nombreCliente) ||
-                    string.IsNullOrWhiteSpace(apellidoCliente) ||
-                    string.IsNullOrWhiteSpace(telefono) ||
-                    string.IsNullOrWhiteSpace(documentoTexto) ||
-                    string.IsNullOrWhiteSpace(email) ||
-                    string.IsNullOrWhiteSpace(direccionInstalacion) ||
-                    string.IsNullOrWhiteSpace(cantidadTexto))
+                // Crear objeto de cotización
+                ClCotizacionE cotizacion = new ClCotizacionE
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert",
-                        "Swal.fire('Campos requeridos', 'Todos los campos son obligatorios.', 'warning');", true);
-                    return;
-                }
-
-                // Validación de número de documento
-                if (!int.TryParse(documentoTexto, out int documento))
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert",
-                        "Swal.fire('Dato inválido', 'El documento debe ser un número válido.', 'warning');", true);
-                    return;
-                }
-
-                // Validación de cantidad
-                if (!int.TryParse(cantidadTexto, out int cantidad) || cantidad <= 0)
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert",
-                        "Swal.fire('Dato inválido', 'La cantidad debe ser un número mayor que cero.', 'warning');", true);
-                    return;
-                }
-
-                // Validación del producto
-                int idProducto = Convert.ToInt32(ddlListaProductos.SelectedValue);
-                if (idProducto == 0)
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert",
-                        "Swal.fire('Error', 'Debe seleccionar un producto.', 'warning');", true);
-                    return;
-                }
-
-                // Si todo está correcto, crea el objeto y lo registra
-                ClCotizacionE oCotizacion = new ClCotizacionE
-                {
-                    nombreCliente = nombreCliente,
-                    apellidoCliente = apellidoCliente,
-                    documento = documento,
-                    telefono = telefono,
-                    email = email,
-                    direccionInstalacion = direccionInstalacion,
-                    idProducto = idProducto,
-                    cantidad = cantidad,
-                    observaciones = observaciones
+                    nombreCliente = TxtNombreCliente.Text.Trim(),
+                    apellidoCliente = TxtApellidoCliente.Text.Trim(),
+                    documento = int.Parse(txtDocumento.Text.Trim()),
+                    email = txtEmail.Text.Trim(),
+                    telefono = TxtTelefono.Text.Trim(),
+                    direccionInstalacion = txtDireccion.Text.Trim(),
+                    tipoTrabajo = "Cotizacion",
+                    observaciones = TxtObservaciones.Text.Trim(),
+                    fechaCotizacion = DateTime.Now,
                 };
 
-                _CotizacionL.MtdRegistroCotizacion(oCotizacion);
+                // ✅ Asegurarse que los productos sean del tipo correcto
+                cotizacion.Productos = ProductosSeleccionados.Select(p => new ProductoCotizacion
+                {
+                    idProducto = p.IdProducto,
+                    cantidad = p.Cantidad,
+                   
+                }).ToList();
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert",
-                    "Swal.fire('Registro exitoso', 'La cotización se ha registrado correctamente.', 'success');", true);
+                // Enviar a lógica de negocio
+                int resultado = _CotizacionL.MtdRegistroCotizacion(cotizacion);
 
-                LimpiarCampos();
+                // Validar respuesta
+                if (resultado > 0)
+                {
+                    MostrarAlerta("Éxito", "Cotización registrada correctamente.", "success");
+                    LimpiarFormulario();
+                }
+                else
+                {
+                    MostrarAlerta("Error", "No se pudo registrar la cotización.", "error");
+                }
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "Alert",
-                    $"Swal.fire('Error', '{ex.Message}', 'error');", true);
+                MostrarAlerta("Error", "Ocurrió un error: " + ex.Message, "error");
             }
         }
 
 
-        private void LimpiarCampos()
+        private void MostrarAlerta(string titulo, string mensaje, string icono)
         {
-            if(ddlListaProductos.SelectedIndex == 0)
-            {
-                TxtNombreCliente.Text = string.Empty;
-                TxtApellidoCliente.Text = string.Empty;
-                TxtTelefono.Text = string.Empty;
-                txtEmail.Text = string.Empty;
-                txtDocumento.Text = string.Empty;
-                txtDireccion.Text = string.Empty;
-                TxtCantidad.Text = string.Empty;
-                TxtObservaciones.Text = string.Empty;
-                ddlListaProductos.SelectedIndex = 0;
+            ScriptManager.RegisterStartupScript(this, GetType(), "alerta",
+                $"Swal.fire('{titulo}', '{mensaje}', '{icono}');", true);
+        }
 
-            }
-            else
-            {
-                TxtNombreCliente.Text = string.Empty;
-                TxtApellidoCliente.Text = string.Empty;
-                TxtTelefono.Text = string.Empty;
-                txtEmail.Text = string.Empty;
-                txtDocumento.Text = string.Empty;
-                txtDireccion.Text = string.Empty;
-                TxtCantidad.Text = string.Empty;
-                TxtObservaciones.Text = string.Empty;
-                ddlListaProductos.SelectedIndex = 0;
-            }
+        private void LimpiarFormulario()
+        {
+            TxtNombreCliente.Text = "";
+            TxtApellidoCliente.Text = "";
+            txtDocumento.Text = "";
+            txtEmail.Text = "";
+            TxtTelefono.Text = "";
+            txtDireccion.Text = "";
+            TxtObservaciones.Text = "";
+            ProductosSeleccionados = new List<ProductoCotizacionTemp>();
+            CargarGridProductos();
         }
     }
+    [Serializable]
+    public class ProductoCotizacionTemp
+    {
+        public int IdProducto { get; set; }
+        public string NombreProducto { get; set; }
+        public int Cantidad { get; set; }
+    }
+
+    
 }

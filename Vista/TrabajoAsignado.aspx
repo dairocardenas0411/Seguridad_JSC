@@ -1,16 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Master.Master" AutoEventWireup="true" CodeBehind="ListaCotizaciones.aspx.cs" Inherits="Seguridad_JSC.Vista.ListaCotizaciones" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Master.Master" AutoEventWireup="true" CodeBehind="TrabajoAsignado.aspx.cs" Inherits="Seguridad_JSC.Vista.TrabajoAsignado" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="..\Vista\css\UserCotizacion.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="text-center">
-        <h1 class="title">TRABAJO</h1>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="..\Vista\css\Cotizacionprint.css" rel="stylesheet" />
+    <link href="..\Vista\css\UserCotizacion.css" rel="stylesheet" />
+
 
     <asp:Label ID="LblidUsuario" runat="server" Text="Label" Visible="false"></asp:Label>
 
@@ -33,11 +31,11 @@
                 <table class="table table-striped table-hover" id="tablaCotizaciones">
                     <thead>
                         <tr>
-                            <th>Nombres</th>
-                            <th>Correo</th>
+                            <th>Nombre Cliente</th>
                             <th>Dirección</th>
+                            <th>Telefono</th>
+                            <th>Producto</th>
                             <th>Observaciones</th>
-                            <th>Fecha</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
@@ -45,43 +43,39 @@
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
-                    <td><%# Eval("NombreCliente") %></td>
-                    <td><%# Eval("email") %></td>
+                    <td><%# Eval("NombreCliente") %> <%# Eval("apellidoCliente") %></td>
                     <td><%# Eval("DireccionInstalacion") %></td>
-                    <td><%# Eval("Observaciones") %></td>
-                    <td><%# Eval("fechaCotizacion") %></td>
-                    <td>
-                        <div class="btn-container">
-                            <div class="tooltip-container" style="display: inline-block; margin-right: 10px;">
-                                <asp:Button ID="btnVerCotizacion" runat="server" CssClass="btn-admin btn-ver" Text="👀"
-                                    CommandArgument='<%# Eval("idCotizacion") %>' OnCommand="btnVerCotizacion_Command" />
-                                <span class="tooltip-text">Ver Detalles</span>
-                            </div>
+                    <td><%# Eval("telefono") %></td>
+                    <td><%# Eval("nombreProducto") %></td>
 
-                            <div class="tooltip-container" style="display: inline-block;">
-                                <asp:LinkButton ID="btnEliminar" runat="server"
-                                    CommandArgument='<%# Eval("idCotizacion") %>'
-                                    CommandName="Eliminar"
-                                    OnCommand="btnEliminar_Command"
-                                    OnClientClick='<%# "return confirmarEliminacion(" + Eval("idCotizacion") + ");" %>'
-                                    CssClass="btn-admin btn-eliminar">🗑</asp:LinkButton>
-                                <span class="tooltip-text">Eliminar Trabajo</span>
-                            </div>
-
-
-
-
-                        </div>
+                    <!-- Campo editable para observacionesTrabajo -->
+                    <td style="width: 400px;">
+                        <asp:TextBox ID="txtObservacionTrabajo" runat="server"
+                            Text='<%# Eval("observacionesTrabajo") %>'
+                            CssClass="form-control"
+                            TextMode="MultiLine"
+                            Rows="5"
+                            Style="resize: horizontal; height: 100px; width: 100%;"></asp:TextBox>
                     </td>
 
+
+                    <td>
+                        <asp:Button ID="bntFinalizar" runat="server" Text="✅ Finalizar"
+                            CssClass="btn-admin btn-Finalizar" CommandName="Finalizar"
+                            CommandArgument='<%# Eval("idCotizacion") %>' OnClick="bntFinalizar_Click" />
+
+                        <asp:Button ID="btnObservacionesT" runat="server" Text="Guardar Observación"
+                            CssClass="btn-admin btn-ver" CommandName="GuardarObservacion"
+                            CommandArgument='<%# Eval("idCotizacion") %>' OnClick="btnObservacionesT_Click" />
+                    </td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
                 </tbody>
-                </table>
+        </table>
             </FooterTemplate>
         </asp:Repeater>
-
+      
         <div class="pagination-container">
             <asp:Button ID="btnPrev" runat="server" Text="« Anterior" OnClick="btnPrev_Click" CssClass="btn btn-outline-secondary btn-sm" />
             <asp:Label ID="lblPageInfo" runat="server" Text="" Style="margin: 0 15px;"></asp:Label>
@@ -89,13 +83,9 @@
         </div>
     </div>
 
-    
-    
+
 
     <!-- js -->
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <script src="..\Vista\js\JavaScript.js"></script>
-
-
-
 </asp:Content>

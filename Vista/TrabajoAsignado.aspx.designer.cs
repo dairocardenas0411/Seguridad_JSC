@@ -11,7 +11,7 @@ namespace Seguridad_JSC.Vista
 {
 
 
-    public partial class ListaCotizaciones
+    public partial class TrabajoAsignado
     {
 
         /// <summary>

@@ -28,7 +28,7 @@ namespace Seguridad_JSC.Datos
                     idUsuario = Convert.ToInt32(reader["idUsuario"]),
                     email = reader["email"].ToString(),
                     nombreUsuario = reader["nombreUsuario"].ToString(),
-                    idRol = Convert.ToInt32(reader["idRol"]) // Ahora se obtiene idRol en vez de nombreRol
+                    idRol = Convert.ToInt32(reader["idRol"]) 
                 };
             }
 

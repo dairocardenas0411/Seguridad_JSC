@@ -68,8 +68,14 @@
     <Content Include="Vista\admin.aspx" />
     <Content Include="Vista\Cotizacion.aspx" />
     <Content Include="Vista\css\Cotizacion.css" />
+    <Content Include="Vista\css\Cotizacionprint.css" />
+    <Content Include="Vista\Instalacion.aspx" />
+    <Content Include="Vista\js\JavaScript.js" />
+    <Content Include="Vista\js\jsCotizacion.js" />
+    <Content Include="Vista\Recursos\eye.svg" />
     <Content Include="Vista\css\Master.css" />
     <Content Include="Vista\css\productos.css" />
+    <Content Include="Vista\css\UserCotizacion.css" />
     <Content Include="Vista\DashboardAdmin.aspx" />
     <Content Include="Vista\ListaCotizaciones.aspx" />
     <Content Include="Vista\Navbar.ascx" />
@@ -79,6 +85,7 @@
     <Content Include="Vista\Recursos\icon-1.jpg" />
     <Content Include="Vista\Recursos\user.png" />
     <Content Include="Vista\TecnicoSeguridad_JSC.aspx" />
+    <Content Include="Vista\TrabajoAsignado.aspx" />
     <Content Include="Vista\UsuarioCotizacion.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -87,9 +94,11 @@
     <Compile Include="Datos\ClLoginD.cs" />
     <Compile Include="Datos\ClListaProductoD.cs" />
     <Compile Include="Datos\ClCotizacionD.cs" />
+    <Compile Include="Datos\ClUsuarioD.cs" />
     <Compile Include="Entidades\ClCotizacionE.cs" />
     <Compile Include="Entidades\ClProductoE.cs" />
     <Compile Include="Entidades\ClLoginE.cs" />
+    <Compile Include="Entidades\ClUsuarioE.cs" />
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -100,6 +109,7 @@
     <Compile Include="Logica\ClListaProductoL.cs" />
     <Compile Include="Logica\ClLoginL.cs" />
     <Compile Include="Logica\ClCotizacionL.cs" />
+    <Compile Include="Logica\ClUsuarioL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vista\admin.aspx.cs">
       <DependentUpon>admin.aspx</DependentUpon>
@@ -121,6 +131,13 @@
     </Compile>
     <Compile Include="Vista\DashboardAdmin.aspx.designer.cs">
       <DependentUpon>DashboardAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Instalacion.aspx.cs">
+      <DependentUpon>Instalacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Instalacion.aspx.designer.cs">
+      <DependentUpon>Instalacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\ListaCotizaciones.aspx.cs">
       <DependentUpon>ListaCotizaciones.aspx</DependentUpon>
@@ -156,6 +173,13 @@
     </Compile>
     <Compile Include="Vista\TecnicoSeguridad_JSC.aspx.designer.cs">
       <DependentUpon>TecnicoSeguridad_JSC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\TrabajoAsignado.aspx.cs">
+      <DependentUpon>TrabajoAsignado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\TrabajoAsignado.aspx.designer.cs">
+      <DependentUpon>TrabajoAsignado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\UsuarioCotizacion.aspx.cs">
       <DependentUpon>UsuarioCotizacion.aspx</DependentUpon>
