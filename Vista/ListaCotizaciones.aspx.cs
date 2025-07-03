@@ -38,7 +38,7 @@ namespace Seguridad_JSC.Vista
 
                 if (eliminado)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "exito", "Swal.fire('Eliminado', 'Daros eliminados con éxito.', 'success');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "exito", "Swal.fire('Eliminado', 'Datos eliminados con éxito.', 'success');", true);
                 }
                 else
                 {

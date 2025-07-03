@@ -82,13 +82,13 @@
                 <div class="card-body">
                     <div class="row g-3 align-items-end">
                         <div class="col-md-5">
-                            <label for="ddlListaProductos">Tipo de Producto</label>
+                            <label for="ddlListaProductos" style="color:white">Tipo de Producto</label>
                             <asp:DropDownList ID="ddlListaProductos" runat="server" CssClass="form-select">
                                 <asp:ListItem Text="-- Seleccione un producto --" Value="0" />
                             </asp:DropDownList>
                         </div>
                         <div class="col-md-3">
-                            <label for="TxtCantidad">Cantidad</label>
+                            <label for="TxtCantidad" style="color:white" >Cantidad</label>
                             <asp:TextBox ID="TxtCantidad" TextMode="Number" runat="server" CssClass="form-control" 
                                 placeholder="1" min="1" value="1" />
                         </div>
@@ -100,7 +100,7 @@
 
                     <!-- Lista de productos agregados -->
                     <div class="mt-4">
-                        <h5>Productos Agregados:</h5>
+                        <h5 style="color:white" >Productos Agregados:</h5>
                         <div id="productosContainer" class="table-responsive">
                             <asp:UpdatePanel ID="UpdatePanelProductos" runat="server">
                                 <ContentTemplate>

@@ -3,11 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link href="..\Vista\css\Cotizacionprint.css" rel="stylesheet" />
 
     <style>
-        /* Estilos para ocultar sección del proveedor en la impresión */
         @media print {
             .no-print {
                 display: none !important;
@@ -24,6 +23,7 @@
     <asp:Label ID="lblMensaje" Visible="false" runat="server" ForeColor="Red" CssClass="mensaje-error"></asp:Label>
     <asp:Label ID="LblidUsuario" runat="server" Text="Label" Visible="false"></asp:Label>
 
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
     <div class="btn-container no-print" style="margin-bottom: 20px;">
         <asp:Repeater ID="rptBtn" runat="server">
@@ -46,15 +46,25 @@
                 <asp:Button ID="btnImprimir" runat="server" Text="🖨️ Imprimir"
                     CssClass="btn-imprimir" OnClientClick="imprimirSeccion(); return false;" />
 
-                <asp:Button ID="btnAbrirModal" runat="server" Text="💱Actualizar Datos"
+                <asp:Button ID="btnAbrirModal" runat="server" Text="💱Actualizar Datos Cliente"
                     CssClass="btn-actualizar"
                     CommandArgument='<%# Eval("idCotizacion") %>'
-                    OnCommand="btnAbrirModal_Command" Visible='<%# !EsTecnico %>' />
+                    OnCommand="btnAbrirModal_Command"
+                    Visible='<%# !EsTecnico %>' />
+
+                <asp:Button ID="btnAbrirModalProductos" runat="server" Text="🧾 Ver / Editar Productos"
+                    CssClass="btn-actualizar"
+                    CommandArgument='<%# Eval("idCotizacion") %>'
+                    OnCommand="btnAbrirModalProductos_Command"
+                    Visible='<%# Eval("estado").ToString() == "Pendiente" && !EsTecnico %>' />
+
+
             </ItemTemplate>
         </asp:Repeater>
     </div>
 
     <div id="areaImprimir" class="cotizacion-wrapper">
+
 
         <asp:Repeater ID="rptDatosCotizacion" runat="server">
             <ItemTemplate>
@@ -64,7 +74,7 @@
                     </div>
                     <div class="info-grid">
                         <div class="info-item">
-                            <strong>Documento N°:</strong>
+                            <strong>N°:</strong>
                             <span>#000<%# Eval("idCotizacion") %></span>
                         </div>
                         <div class="info-item">
@@ -284,7 +294,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalActualizarLabel">Actualizar Datos de Cotización</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar">X</button>
                 </div>
 
                 <div class="modal-body">
@@ -324,14 +334,8 @@
 
                     <h6 class="mb-3"><i class="fas fa-box"></i>Datos del Producto</h6>
                     <div class="row g-3 mb-4">
-                        <div class="col-md-6">
-                            <label for="ddlListaProductos" class="form-label">Tipo de Producto</label>
-                            <asp:DropDownList ID="ddlListaProductos" runat="server" CssClass="form-select" />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="txtCantidad" class="form-label">Cantidad Solicitada</label>
-                            <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" TextMode="Number" />
-                        </div>
+
+
                         <div class="col-md-6">
                             <label for="ddlTipoTrabajo" class="form-label">Tipo Trabajo</label>
                             <asp:DropDownList ID="ddlTipoTrabajo" runat="server" CssClass="form-select">
@@ -343,7 +347,10 @@
                         </div>
                         <div class="col-md-6">
                             <label for="ddlTecnico" class="form-label">Técnico Asignado</label>
-                            <asp:DropDownList ID="ddlTecnico" runat="server" CssClass="form-select" />
+                            <asp:DropDownList ID="ddlTecnico" runat="server" CssClass="form-select">
+                                <asp:ListItem Text="Seleccione un técnico" Value="-1" />
+                            </asp:DropDownList>
+
                         </div>
                     </div>
 
@@ -361,31 +368,109 @@
                             <label for="txtObservacionesTecnico" class="form-label">Observaciones del Trabajo</label>
                             <asp:TextBox ID="txtObservacionesTecnico" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="2" />
                         </div>
-                        <div class="col-12">
-                            <label for="ddlEstado" class="form-label">Estado de la Cotización</label>
-                            <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select">
-                                <asp:ListItem Text="Pendiente" Value="Pendiente"></asp:ListItem>
-                                <asp:ListItem Text="Aceptada" Value="Aceptada" Enabled="false" Style="display: none;"></asp:ListItem>
-                                <asp:ListItem Text="Rechazada" Value="Rechazada"></asp:ListItem>
-                                <asp:ListItem Text="En Instalación" Value="En Instalacion"></asp:ListItem>
-                                <asp:ListItem Text="En Revisión" Value="En Revision"></asp:ListItem>
-                                <asp:ListItem Text="Técnico Completada" Value="Tecnico Completada"></asp:ListItem>
-                                <asp:ListItem Text="Completada" Value="Completada"></asp:ListItem>
-                            </asp:DropDownList>
-                        </div>
+
                     </div>
                 </div>
-
                 <div class="modal-footer d-flex justify-content-center">
                     <asp:Button ID="bntActualizar" runat="server" Text="💾 Actualizar Cotización"
                         CssClass="btn-acpetar" CommandName="Actualizar"
                         OnCommand="btnActualizar_Command" />
                 </div>
+                <div class="modal-footer d-flex justify-content-center">
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <!-- Modal Productos -->
+    <div class="modal fade" id="modalProductos" tabindex="-1" aria-labelledby="modalProductosLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="modalProductosLabel"><i class="fas fa-boxes"></i>Productos Seleccionados</h5>
+                    <button type="button" style=color:white; class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar">X</button>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanelModalProductos" runat="server">
+                        <ContentTemplate>
+
+                            <div class="row g-3 align-items-end mb-4">
+                                <div class="col-md-6">
+                                    <label for="ddlListaProductos" class="form-label">Producto</label>
+                                    <asp:DropDownList ID="ddlListaProductos" runat="server" CssClass="form-select">
+                                        <asp:ListItem Text="-- Seleccione un producto --" Value="0" />
+                                    </asp:DropDownList>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="TxtCantidad" class="form-label">Cantidad</label>
+                                    <asp:TextBox ID="TxtCantidad" runat="server" CssClass="form-control" TextMode="Number" Text="1" />
+                                </div>
+
+                                <div class="col-md-3 d-grid">
+                                    <asp:Button ID="BtnAgregarProducto" runat="server" CssClass="btn btn-primary"
+                                        Text="➕ Agregar Producto" OnClick="BtnAgregarProducto_Click" />
+                                </div>
+                            </div>
+
+                            <asp:GridView ID="gvProductosCotizacion" runat="server" CssClass="table table-striped table-hover"
+                                AutoGenerateColumns="False" OnRowCommand="gvProductosCotizacion_RowCommand">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Imagen">
+                                        <ItemTemplate>
+                                            <img src='<%# ResolveUrl("~/Vista/Recursos/" + Eval("imagen")) %>'
+                                                alt="Producto" width="80" height="80"
+                                                style="object-fit: cover; border-radius: 8px;" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:TemplateField HeaderText="Codigo">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCodigo" runat="server" Text='<%# Eval("codigo") %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:TemplateField HeaderText="Producto">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblProducto" runat="server" Text='<%# Eval("NombreProducto") %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:TemplateField HeaderText="Cantidad">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCantidad" runat="server" Text='<%# Eval("Cantidad") %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:TemplateField HeaderText="Acciones">
+                                        <ItemTemplate>
+                                            <asp:Button ID="btnEliminarProducto" runat="server"
+                                                CommandName="Eliminar"
+                                                CommandArgument='<%# Container.DataItemIndex %>'
+                                                Text="🗑️ Eliminar" CssClass="btn btn-danger btn-sm" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+
+                <div class="modal-footer">
+                    <asp:Button ID="btnActualizarProductos" runat="server" Text="💾 Guardar Cambios"
+                        CssClass="btn-acpetar"
+                        OnClick="btnActualizarProductos_Click" />
+                </div>
             </div>
         </div>
     </div>
 
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="..\Vista\js\JavaScript.js"></script>
 
 </asp:Content>

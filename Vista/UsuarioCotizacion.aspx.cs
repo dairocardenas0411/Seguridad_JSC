@@ -22,7 +22,7 @@ namespace Seguridad_JSC.Vista
             }
             else
             {
-                Response.Redirect("index.aspx");
+                Response.Redirect("../index.aspx");
             }
             if (!IsPostBack)
             {
@@ -32,9 +32,9 @@ namespace Seguridad_JSC.Vista
                     if (int.TryParse(Request.QueryString["idCotizacion"], out idCotizacion))
                     {
                         CargarTrabajo(idCotizacion);
-                        CargarProductos();
                         CargarDatosProducto(idCotizacion);
                         CargarTecnicos();
+                        CargarGridProductosModal();
                     }
                     else
                     {
@@ -57,16 +57,16 @@ namespace Seguridad_JSC.Vista
             txtTelefono.Text = row["telefono"].ToString();
             txtEmail.Text = row["email"].ToString();
             txtDireccion.Text = row["direccionInstalacion"].ToString();
-            // ... resto de campos del modal
+            txtObservaciones.Text = row["observaciones"].ToString();
 
-            // Manejar DropDownLists
+
+
             string tecnicoId = row["idTecnico"].ToString();
             if (!string.IsNullOrEmpty(tecnicoId) && ddlTecnico.Items.FindByValue(tecnicoId) != null)
             {
                 ddlTecnico.SelectedValue = tecnicoId;
             }
 
-            // Valores decimales
             if (decimal.TryParse(row["valorInstalacion"].ToString(), out decimal valorInstalacion))
                 txtValorInstalacion.Text = valorInstalacion.ToString("0.##");
 
@@ -105,6 +105,9 @@ namespace Seguridad_JSC.Vista
             {
                 rptDatosProductos.DataSource = DtProductos;
                 rptDatosProductos.DataBind();
+                gvProductosCotizacion.DataSource = DtProductos;
+                gvProductosCotizacion.DataBind();
+
 
             }
             else
@@ -116,33 +119,7 @@ namespace Seguridad_JSC.Vista
             }
         }
 
-        private void CargarProductos()
-        {
-            try
-            {
-                ClListaProductoL oListaProductoL = new ClListaProductoL();
-                List<ClProductoE> listaProducto = oListaProductoL.MtdListarProducto();
 
-                if (listaProducto.Count > 0)
-                {
-                    ddlListaProductos.DataSource = listaProducto;
-                    ddlListaProductos.DataTextField = "nombreProducto";
-                    ddlListaProductos.DataValueField = "idProducto";
-                    ddlListaProductos.DataBind();
-                }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alertNoProductos",
-                       "Swal.fire('Sin datos', 'No se encontraron Productos disponibles.', 'info');", true);
-                }
-                ddlListaProductos.Items.Insert(0, new ListItem("--Seleccione un producto--", "0"));
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert", $"alert('Error al cargar los Productos: {ex.Message}');", true);
-            }
-
-        }
         protected void btnEliminar_Command(object sender, CommandEventArgs e)
         {
             if (int.TryParse(e.CommandArgument.ToString(), out int idCotizacion))
@@ -316,37 +293,49 @@ namespace Seguridad_JSC.Vista
             }
 
         }
+
+
         protected void btnAbrirModal_Command(object sender, CommandEventArgs e)
         {
-            int idCotizacion = int.Parse(e.CommandArgument.ToString());
-            idCotizacion = Convert.ToInt32(hfIdTrabajo.Value);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "abrirModal", "$('#modalActualizar').modal('show');", true);
+            if (int.TryParse(e.CommandArgument.ToString(), out int idCotizacion))
+            {
+                hfIdTrabajo.Value = idCotizacion.ToString();
+
+                ClCotizacionL cotizacionLogica = new ClCotizacionL();
+                DataTable dt = cotizacionLogica.ObtenerDatosCotizacion(idCotizacion);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    CargarTecnicos();
+                    LlenarDatosModal(dt.Rows[0]);
+                }
+
+                ScriptManager.RegisterStartupScript(
+                     ScriptManager.GetCurrent(this),
+                     this.GetType(),
+                     "abrirModal",
+                     "var modal = new bootstrap.Modal(document.getElementById('modalActualizar')); modal.show();",
+                     true
+                 );
+
+            }
         }
+
 
         protected void btnActualizar_Command(object sender, CommandEventArgs e)
         {
             try
             {
-                int idCotizacion;
-                try
-                {
-                    idCotizacion = Convert.ToInt32(hfIdTrabajo.Value);
-                }
-                catch
-                {
+                if (!int.TryParse(hfIdTrabajo.Value, out int idCotizacion))
                     throw new Exception("El ID de la cotización no es válido.");
-                }
 
-                ClCotizacionE cotizacion = new ClCotizacionE();
-
-                // Validaciones
                 if (string.IsNullOrWhiteSpace(txtNombreCliente.Text))
                     throw new Exception("El nombre del cliente es obligatorio.");
 
                 if (string.IsNullOrWhiteSpace(txtApellidoCliente.Text))
                     throw new Exception("El apellido del cliente es obligatorio.");
 
-                if (string.IsNullOrWhiteSpace(txtDocumento.Text) || !int.TryParse(txtDocumento.Text.Trim(), out int documento))
+                if (!int.TryParse(txtDocumento.Text.Trim(), out int documento))
                     throw new Exception("Debe ingresar un número de documento válido.");
 
                 if (string.IsNullOrWhiteSpace(txtTelefono.Text))
@@ -358,75 +347,251 @@ namespace Seguridad_JSC.Vista
                 if (string.IsNullOrWhiteSpace(txtDireccion.Text))
                     throw new Exception("La dirección de instalación es obligatoria.");
 
+                if (ddlTecnico.SelectedValue == "0")
+                    throw new Exception("Debe seleccionar un técnico.");
 
-
-                if (string.IsNullOrWhiteSpace(txtCantidad.Text) || !int.TryParse(txtCantidad.Text.Trim(), out int cantidad))
-                    throw new Exception("La cantidad es obligatoria y debe ser un número entero.");
-
-                if (string.IsNullOrWhiteSpace(txtObservaciones.Text))
-                    throw new Exception("Las observaciones son obligatorias.");
-
-                if (string.IsNullOrWhiteSpace(txtValorInstalacion.Text) || !decimal.TryParse(txtValorInstalacion.Text.Trim(), out decimal valorInstalacion))
+                if (!decimal.TryParse(txtValorInstalacion.Text.Trim(), out decimal valorInstalacion))
                     throw new Exception("Debe ingresar un valor de instalación válido.");
 
-                if (string.IsNullOrWhiteSpace(txtCargosAdicionales.Text) || !decimal.TryParse(txtCargosAdicionales.Text.Trim(), out decimal cargosAdicionales))
+                if (!decimal.TryParse(txtCargosAdicionales.Text.Trim(), out decimal cargosAdicionales))
                     throw new Exception("Debe ingresar un valor de cargos adicionales válido.");
 
-
-
-                if (string.IsNullOrEmpty(ddlTecnico.SelectedValue) || string.IsNullOrEmpty(ddlListaProductos.SelectedValue))
-                    throw new Exception("Debe seleccionar un técnico y un producto.");
-
-                // Asignación de valores
-                cotizacion.idCotizacion = idCotizacion;
-                cotizacion.nombreCliente = txtNombreCliente.Text.Trim();
-                cotizacion.apellidoCliente = txtApellidoCliente.Text.Trim();
-                cotizacion.documento = documento;
-                cotizacion.telefono = txtTelefono.Text.Trim();
-                cotizacion.email = txtEmail.Text.Trim();
-                cotizacion.direccionInstalacion = txtDireccion.Text.Trim();
-                cotizacion.estado = ddlEstado.SelectedValue;
-                cotizacion.cantidad = cantidad;
-                cotizacion.observaciones = txtObservaciones.Text.Trim();
-                cotizacion.valorInstalacion = valorInstalacion;
-                cotizacion.cargosAdicionales = cargosAdicionales;
-                cotizacion.tipoTrabajo = ddlTipoTrabajo.SelectedValue;
-                cotizacion.observacionesTrabajo = txtObservacionesTecnico.Text.Trim();
-                cotizacion.idUsuarioT = Convert.ToInt32(ddlTecnico.SelectedValue);
-                cotizacion.idProducto = Convert.ToInt32(ddlListaProductos.SelectedValue);
-
+                ClCotizacionE cotizacion = new ClCotizacionE
+                {
+                    idCotizacion = idCotizacion,
+                    nombreCliente = txtNombreCliente.Text.Trim(),
+                    apellidoCliente = txtApellidoCliente.Text.Trim(),
+                    documento = documento,
+                    telefono = txtTelefono.Text.Trim(),
+                    email = txtEmail.Text.Trim(),
+                    direccionInstalacion = txtDireccion.Text.Trim(),
+                    observaciones = txtObservaciones.Text.Trim(),
+                    valorInstalacion = valorInstalacion,
+                    cargosAdicionales = cargosAdicionales,
+                    tipoTrabajo = ddlTipoTrabajo.SelectedValue,
+                    observacionesTrabajo = txtObservacionesTecnico.Text.Trim(),
+                    idUsuarioT = int.TryParse(ddlTecnico.SelectedValue, out int idTecnico) ? idTecnico : 0
+                };
 
                 ClCotizacionL logica = new ClCotizacionL();
-                bool resultado = logica.MtdActualizarTrabajo(cotizacion);
+                bool actualizado = logica.MtdActualizarTrabajo(cotizacion);
 
-                if (resultado)
+                if (actualizado)
                 {
-                    string estado = cotizacion.estado;
+                    string script = @"Swal.fire('Actualizado', 'Datos actualizados correctamente.', 'success');";
 
-                    if (estado == "Rechazada" || estado == "Completada")
-                    {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect",
-                            "Swal.fire('Actualizado', 'El Tarea ha sido Rechazada O Completada.', 'success').then(() => { window.location.href = '../Vista/ListaCotizaciones.aspx'; });", true);
-                    }
-                    else
-                    {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "success",
-                            "Swal.fire('Actualizado', 'Datos Actualizados correctamente', 'success');", true);
-                        CargarTrabajo(cotizacion.idCotizacion);
-                    }
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "actualizado", script, true);
+                    CargarTrabajo(cotizacion.idCotizacion);
+                    CargarDatosProducto(cotizacion.idCotizacion);
                 }
                 else
                 {
-                    throw new Exception("No se pudo actualizar la cotización en la base de datos.");
+                    throw new Exception("No se pudo actualizar la cotización.");
                 }
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "error",
                     $"Swal.fire('Error', '{ex.Message}', 'error');", true);
             }
         }
+        protected void btnAbrirModalProductos_Command(object sender, CommandEventArgs e)
+        {
+            if (int.TryParse(e.CommandArgument.ToString(), out int idCotizacion))
+            {
+                hfIdTrabajo.Value = idCotizacion.ToString();
 
+                ClCotizacionL cotizacionLogica = new ClCotizacionL();
+                DataTable dt = cotizacionLogica.ObtenerDatosCotizacion(idCotizacion);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    CargarListaProductosModal();
+                    CargarProductosAsociados(idCotizacion); // <<<<<< AQUI SE CARGAN LOS EXISTENTES
+                    CargarGridProductosModal();
+                }
+
+                ScriptManager.RegisterStartupScript(
+                      ScriptManager.GetCurrent(this),
+                      this.GetType(),
+                      "abrirModal",
+                      "var modal = new bootstrap.Modal(document.getElementById('modalProductos')); modal.show();",
+                      true
+                );
+            }
+        }
+
+        private void CargarListaProductosModal()
+        {
+            ClListaProductoL logicaProducto = new ClListaProductoL();
+            List<ClProductoE> lista = logicaProducto.MtdListarProducto();
+
+            ddlListaProductos.DataSource = lista;
+            ddlListaProductos.DataTextField = "nombreProducto";
+            ddlListaProductos.DataValueField = "idProducto";
+            ddlListaProductos.DataBind();
+            ddlListaProductos.Items.Insert(0, new ListItem("-- Seleccione un producto --", "0"));
+        }
+        private void CargarGridProductosModal()
+        {
+            gvProductosCotizacion.DataSource = ProductosSeleccionados;
+            gvProductosCotizacion.DataBind();
+        }
+
+
+
+        private void CargarProductosAsociados(int idCotizacion)
+        {
+            ClCotizacionL logica = new ClCotizacionL();
+            DataTable dt = logica.MtdDatosProductos(idCotizacion); // ← Asegúrate que devuelva el campo 'foto'
+
+            var productos = new List<ProductoCotizacionTemp>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                productos.Add(new ProductoCotizacionTemp
+                {
+                    IdProducto = Convert.ToInt32(row["idProducto"]),
+                    NombreProducto = row["nombreProducto"].ToString(),
+                    codigo = row["codigo"].ToString(),
+                    Cantidad = Convert.ToInt32(row["cantidad"]),
+                    Imagen = row["imagen"].ToString()
+                });
+
+            }
+
+            ProductosSeleccionados = productos;
+        }
+
+
+
+        protected void BtnAgregarProducto_Click(object sender, EventArgs e)
+        {
+            int idProducto = int.Parse(ddlListaProductos.SelectedValue);
+            string nombreProducto = ddlListaProductos.SelectedItem.Text;
+
+            if (idProducto == 0)
+            {
+                MostrarAlerta("Advertencia", "Seleccione un producto válido.", "warning");
+                return;
+            }
+
+            if (!int.TryParse(TxtCantidad.Text, out int cantidad) || cantidad < 1)
+            {
+                MostrarAlerta("Advertencia", "Ingrese una cantidad válida.", "warning");
+                return;
+            }
+
+            var lista = ProductosSeleccionados;
+
+            // Verificar si ya existe el producto
+            var productoExistente = lista.FirstOrDefault(p => p.IdProducto == idProducto);
+
+            if (productoExistente != null)
+            {
+                // Si existe, sumar la cantidad
+                productoExistente.Cantidad += cantidad;
+            }
+            else
+            {
+                // Si no existe, lo agregamos
+                var nuevo = new ProductoCotizacionTemp
+                {
+                    IdProducto = idProducto,
+                    NombreProducto = nombreProducto,
+                    Cantidad = cantidad
+                };
+                lista.Add(nuevo);
+            }
+
+            ProductosSeleccionados = lista;
+            CargarGridProductosModal();
+        }
+
+
+
+        protected void gvProductosCotizacion_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Eliminar")
+            {
+                // Refrescar desde ViewState actual
+                var lista = ProductosSeleccionados;
+
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                if (index >= 0 && index < lista.Count)
+                {
+                    lista.RemoveAt(index);
+                    ProductosSeleccionados = lista;
+                    CargarGridProductosModal();
+                }
+            }
+        }
+
+
+
+        private void MostrarAlerta(string titulo, string mensaje, string icono)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "alerta",
+                $"Swal.fire('{titulo}', '{mensaje}', '{icono}');", true);
+        }
+        protected void btnActualizarProductos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!int.TryParse(hfIdTrabajo.Value, out int idCotizacion))
+                {
+                    MostrarAlerta("Error", "ID de cotización inválido.", "error");
+                    return;
+                }
+
+                var productosActualizados = ProductosSeleccionados
+                    .Select(p => new ProductoCotizacion
+                    {
+                        idProducto = p.IdProducto,
+                        cantidad = p.Cantidad
+                    })
+                    .ToList();
+
+                if (productosActualizados.Count == 0)
+                {
+                    MostrarAlerta("Advertencia", "Debe agregar al menos un producto para actualizar.", "warning");
+                    return;
+                }
+
+                ClCotizacionL logica = new ClCotizacionL();
+                bool resultado = logica.MtdActualizarProductosCotizacion(idCotizacion, productosActualizados);
+
+                if (resultado)
+                {
+                    MostrarAlerta("Éxito", "Productos actualizados correctamente.", "success");
+                    CargarTrabajo(idCotizacion);
+                    CargarDatosProducto(idCotizacion);
+                    ProductosSeleccionados = new List<ProductoCotizacionTemp>();
+                }
+                else
+                {
+                    MostrarAlerta("Error", "No se pudo actualizar los productos.", "error");
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarAlerta("Error", "Ocurrió un error al actualizar: " + ex.Message, "error");
+            }
+        }
+
+
+
+        private List<ProductoCotizacionTemp> ProductosSeleccionados
+        {
+            get
+            {
+                if (ViewState["ProductosSeleccionados"] == null)
+                    ViewState["ProductosSeleccionados"] = new List<ProductoCotizacionTemp>();
+                return (List<ProductoCotizacionTemp>)ViewState["ProductosSeleccionados"];
+            }
+            set => ViewState["ProductosSeleccionados"] = value;
+        }
 
     }
 

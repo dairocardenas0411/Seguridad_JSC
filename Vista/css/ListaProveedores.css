@@ -1,0 +1,620 @@
+﻿/* Reset y Variables */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --success-gradient: linear-gradient(135deg, #2ecc71, #27ae60);
+    --danger-gradient: linear-gradient(135deg, #e74c3c, #c0392b);
+    --info-gradient: linear-gradient(135deg, #3498db, #2980b9);
+    --warning-gradient: linear-gradient(135deg, #F5A623, #E67E22);
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 15px 35px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --border-radius: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Contenedor principal de búsqueda */
+#searchBox {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-medium);
+    border: 1px solid var(--glass-border);
+}
+
+.filas-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Etiqueta de filas */
+#lblFilas {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-right: 10px;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+/* Input de número de filas */
+#TxtNumeroColm {
+    padding: 12px 16px !important;
+    border: 2px solid #e9ecef !important;
+    border-radius: 12px !important;
+    font-size: 14px !important;
+    transition: var(--transition) !important;
+    background: white !important;
+    min-width: 100px !important;
+    box-shadow: none !important;
+    text-align: center;
+}
+
+    #TxtNumeroColm:focus {
+        outline: none !important;
+        border-color: #667eea !important;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+        transform: translateY(-1px);
+    }
+
+/* Botón aplicar */
+#btnAplicarNumero {
+    padding: 12px 24px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    background: var(--primary-gradient) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    #btnAplicarNumero:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+    }
+
+    #btnAplicarNumero:before {
+        content: '\f00c';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+    }
+
+/* Contenedor de búsqueda */
+.search-input-container {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 15px 50px 15px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    font-size: 16px;
+    transition: var(--transition);
+    background: white;
+    box-shadow: none;
+}
+
+    #searchInput:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        transform: translateY(-1px);
+    }
+
+#searchIcon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #667eea;
+    font-size: 18px;
+    pointer-events: none;
+}
+
+/* Contenedor de tabla */
+.table-container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-heavy);
+    border: 1px solid var(--glass-border);
+    margin-top: 0 !important;
+    overflow-x: auto;
+}
+
+/* Tabla de proveedores */
+#tablaProveedores {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    background: transparent;
+    min-width: 900px;
+}
+
+    /* Encabezado de tabla */
+    #tablaProveedores thead {
+        background: var(--primary-gradient);
+        color: white;
+    }
+
+    #tablaProveedores th {
+        padding: 20px 15px;
+        font-weight: 600;
+        text-align: left;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border: none;
+        position: relative;
+    }
+
+        #tablaProveedores th:before {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 8px;
+        }
+
+        #tablaProveedores th:nth-child(1):before {
+            content: '\f03e';
+        }
+        /* Foto */
+        #tablaProveedores th:nth-child(2):before {
+            content: '\f007';
+        }
+        /* Nombre */
+        #tablaProveedores th:nth-child(3):before {
+            content: '\f2c2';
+        }
+        /* Documento */
+        #tablaProveedores th:nth-child(4):before {
+            content: '\f1ad';
+        }
+        /* Empresa */
+        #tablaProveedores th:nth-child(5):before {
+            content: '\f0e0';
+        }
+        /* Email */
+        #tablaProveedores th:nth-child(6):before {
+            content: '\f095';
+        }
+        /* Celular */
+        #tablaProveedores th:nth-child(7):before {
+            content: '\f468';
+        }
+        /* Productos */
+        #tablaProveedores th:nth-child(8):before {
+            content: '\f013';
+        }
+    /* Acción */
+
+    /* Filas de tabla */
+    #tablaProveedores tbody tr {
+        transition: var(--transition);
+        border-bottom: 1px solid #f8f9fa;
+        background: transparent;
+    }
+
+        #tablaProveedores tbody tr:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+    #tablaProveedores td {
+        padding: 20px 15px;
+        vertical-align: middle;
+        border: none;
+        color: #2c3e50;
+    }
+
+    /* Imágenes de proveedor */
+    #tablaProveedores img {
+        width: 80px !important;
+        height: 80px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        border: 3px solid #fff !important;
+        box-shadow: var(--shadow-light) !important;
+        transition: var(--transition) !important;
+        display: block !important;
+        margin-bottom: 15px !important;
+    }
+
+        #tablaProveedores img:hover {
+            transform: scale(1.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+        }
+
+/* Estilo moderno para FileUpload */
+.form-control-file {
+    font-size: 10px !important;
+    border: 1.5px dashed #ced4da !important;
+    border-radius: 10px !important;
+    background: #f8f9fa !important;
+    transition: all 0.3s ease-in-out !important;
+    width: 100% !important;
+    max-width: 200px !important;
+    color: #495057 !important;
+    cursor: pointer !important;
+}
+
+    /* Hover efecto visual suave */
+    .form-control-file:hover {
+        border-color: #4c6ef5 !important;
+        background: #eef2ff !important;
+    }
+
+    /* Estilo en foco para accesibilidad */
+    .form-control-file:focus {
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.2) !important;
+        border-color: #4c6ef5 !important;
+    }
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 576px) {
+    .form-control-file {
+        max-width: 100% !important;
+        font-size: 12px !important;
+    }
+}
+
+
+/* Unificar tamaño y estilo de campos de texto */
+.form-control,
+.form-control-sm,
+textarea.form-control,
+textarea.form-control-sm {
+    padding: 10px 14px !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease-in-out !important;
+    background: white !important;
+    width: 100% !important;
+    max-width: 180px !important;
+    height: 42px !important; /* altura uniforme */
+    box-sizing: border-box !important;
+    overflow: auto !important;
+}
+
+/* Textarea  */
+textarea.form-control,
+textarea.form-control-sm {
+    min-width: 120px !important;
+    max-width: 100% !important;
+    min-height: 42px !important;
+    height: auto !important;
+    color: black;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 10px !important;
+    border-radius: 20px !important; /* opcional para suavizar los bordes */
+}
+
+
+    .form-control:focus,
+    .form-control-sm:focus,
+    textarea.form-control:focus,
+    textarea.form-control-sm:focus {
+        outline: none !important;
+        border-color: #4c6ef5 !important;
+        color: #000 !important;
+        background-color: #eef3ff !important; /* Fondo más claro al enfocar */
+        box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.4) !important; /* Más intensidad */
+        transition: all 0.2s ease-in-out !important;
+        font-weight: 500 !important;
+    }
+
+/* Opcional: transición más fluida para otros estados también */
+.form-control,
+.form-control-sm,
+textarea.form-control,
+textarea.form-control-sm {
+    transition: all 0.3s ease-in-out !important;
+}
+
+
+
+/* Contenedor para centrar botones */
+td > .btn-admin {
+    width: 90px !important; /* Tamaño uniforme */
+    justify-content: center !important; /* Centrar contenido dentro del botón */
+    text-align: center !important; /* Alinear texto */
+}
+
+/* Estilo base de botones */
+.btn-admin {
+    padding: 8px 10px !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease-in-out !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    font-size: 12px !important;
+    margin: 4px auto !important; /* Espaciado y centrado */
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* Alineación centrada de botones dentro del <td> */
+td {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+
+.btn-Perfil {
+    background: var(--warning-gradient) !important;
+    color: white !important;
+    box-shadow: 0 3px 12px rgba(245, 166, 35, 0.3) !important;
+}
+
+    .btn-Perfil:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4) !important;
+        color: white !important;
+    }
+
+    .btn-Perfil:before {
+        content: '\f0c7';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+    }
+
+.btn-Ver {
+    background: var(--info-gradient) !important;
+    color: white !important;
+    box-shadow: 0 3px 12px rgba(52, 152, 219, 0.3) !important;
+}
+
+    .btn-Ver:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4) !important;
+        color: white !important;
+    }
+
+    .btn-Ver:before {
+        content: '\f06e';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+    }
+
+/* Paginación */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 30px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-light);
+}
+
+    .pagination-container .btn {
+        padding: 10px 20px !important;
+        border: 2px solid #e9ecef !important;
+        border-radius: 10px !important;
+        background: white !important;
+        color: #667eea !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        transition: var(--transition) !important;
+        text-decoration: none !important;
+    }
+
+        .pagination-container .btn:hover {
+            border-color: #667eea !important;
+            background: #667eea !important;
+            color: white !important;
+            transform: translateY(-1px) !important;
+        }
+
+    .pagination-container label {
+        font-weight: 600;
+        color: #2c3e50;
+        padding: 0 20px;
+        margin: 0 !important;
+    }
+
+/* Botones de paginación con iconos */
+#btnPrev:before {
+    content: '\f104';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+#btnNext:after {
+    content: '\f105';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-left: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .form-control,
+    .form-control-sm {
+        max-width: 120px !important;
+    }
+
+    #tablaProveedores th,
+    #tablaProveedores td {
+        padding: 15px 10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 992px) {
+    .filas-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .search-input-container {
+        min-width: 100%;
+    }
+
+    #tablaProveedores {
+        min-width: 1000px;
+    }
+}
+
+@media (max-width: 768px) {
+    #searchBox {
+        padding: 20px;
+        margin: 10px 0;
+    }
+
+    .search-input-container {
+        min-width: 100%;
+    }
+
+    #lblFilas {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .pagination-container {
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    #searchBox,
+    .table-container {
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    #tablaProveedores th,
+    #tablaProveedores td {
+        padding: 12px 8px;
+        font-size: 11px;
+    }
+
+    #tablaProveedores img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .btn-admin {
+        padding: 8px 12px !important;
+        font-size: 10px !important;
+        margin: 1px !important;
+    }
+
+    .form-control,
+    .form-control-sm {
+        max-width: 100px !important;
+        font-size: 11px !important;
+    }
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Aplicar animaciones */
+#searchBox,
+.table-container,
+.pagination-container {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.table-container {
+    animation-delay: 0.1s;
+}
+
+.pagination-container {
+    animation-delay: 0.2s;
+}
+
+/* Scrollbar personalizado */
+.table-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: var(--primary-gradient);
+    border-radius: 4px;
+}
+
+    .table-container::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #5a6fd8, #6a4c93);
+    }
+
+/* Estados especiales */
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: transparent;
+}
+
+.table-hover > tbody > tr:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+}
+
+/* Ocultar elementos específicos de Bootstrap si interfieren */
+.table > :not(caption) > * > * {
+    border-bottom-width: 0;
+}
+
+/* Ajustes finales para compatibilidad ASP.NET */
+input[type="file"] {
+    background: transparent !important;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }

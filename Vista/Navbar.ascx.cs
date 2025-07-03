@@ -52,7 +52,9 @@ namespace Seguridad_JSC.Vista
                     Session["idUsuario"] = usuarioAutenticado.idUsuario;
                     Session["email"] = usuarioAutenticado.email;
                     Session["nombreUsuario"] = usuarioAutenticado.nombreUsuario;
+                    Session["foto"] = usuarioAutenticado.foto;
                     Session["idRol"] = usuarioAutenticado.idRol;
+                    Session["nombreRol"] = usuarioAutenticado.nombreRol;
 
                     MostrarAlertaConRedireccion("success", "¡Bienvenido!", "Inicio de sesión exitoso.", usuarioAutenticado.idRol);
                 }
@@ -69,6 +71,7 @@ namespace Seguridad_JSC.Vista
                 MostrarAlerta("error", "Error del sistema", "Ha ocurrido un error inesperado. Por favor, inténtelo nuevamente.");
                 // Log del error (opcional)
                 System.Diagnostics.Debug.WriteLine($"Error en login: {ex.Message}");
+
             }
         }
 

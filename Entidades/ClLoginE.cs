@@ -14,6 +14,8 @@ namespace Seguridad_JSC.Entidades
         public string email { get; set; }
         public string password { get; set; }
         public string rol { get; set; }
+        public string foto { get; set; }
         public int idRol { get; set; }
+        public string nombreRol { get; set; }
     }
 }

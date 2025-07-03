@@ -9,7 +9,6 @@ namespace Seguridad_JSC
 {
     public partial class index : System.Web.UI.Page
     {
-        private readonly ClLoginL usuarioLogica = new ClLoginL();
 
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -2,30 +2,32 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="..\Vista\css\UserCotizacion.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="text-center">
-        <h1 class="title">TRABAJO</h1>
-    </div>
+
 
     <asp:Label ID="LblidUsuario" runat="server" Text="Label" Visible="false"></asp:Label>
 
     <div id="searchBox">
-        <label id="lblFilas">Número de filas por página</label>
-        <asp:TextBox ID="TxtNumeroColm" runat="server" TextMode="Number" placeholder="100" CssClass="form-control" ClientIDMode="Static" />
-        <asp:Button ID="btnAplicarNumero" runat="server" Text="Aplicar" CssClass="btn" OnClick="btnAplicarNumero_Click" ClientIDMode="Static" />
+        <div class="filas-wrapper">
+            <label id="lblFilas">Número de filas por página</label>
+            <asp:TextBox ID="TxtNumeroColm" runat="server" TextMode="Number" placeholder="100" CssClass="form-control" ClientIDMode="Static" />
+            <asp:Button ID="btnAplicarNumero" runat="server" Text="Aplicar" CssClass="btn" OnClick="btnAplicarNumero_Click" ClientIDMode="Static" />
 
-        <div class="search-input-container">
-            <input type="text" id="searchInput" onkeyup="filtrarTabla()" placeholder="Buscar por nombre, correo o producto..." />
-            <i id="searchIcon" class="fas fa-search"></i>
+            <div class="search-input-container">
+                <input type="text" id="searchInput" onkeyup="filtrarTabla()" placeholder="Buscar por nombre, correo o producto..." />
+                <i id="searchIcon" class="fas fa-search"></i>
+            </div>
         </div>
+
+
     </div>
-
-
 
     <div class="table-container mt-4">
         <asp:Repeater ID="rptCotizaciones" runat="server">
@@ -47,33 +49,22 @@
                 <tr>
                     <td><%# Eval("NombreCliente") %></td>
                     <td><%# Eval("email") %></td>
-                    <td><%# Eval("DireccionInstalacion") %></td>
-                    <td><%# Eval("Observaciones") %></td>
+                    <td ><%# Eval("DireccionInstalacion") %></td>
+                    <td ><%# Eval("Observaciones") %></td>
                     <td><%# Eval("fechaCotizacion") %></td>
                     <td>
                         <div class="btn-container">
-                            <div class="tooltip-container" style="display: inline-block; margin-right: 10px;">
-                                <asp:Button ID="btnVerCotizacion" runat="server" CssClass="btn-admin btn-ver" Text="👀"
+                                <asp:Button ID="btnVerCotizacion" runat="server" CssClass="btn-admin btn-ver" Text="📜 Ver Detalles"
                                     CommandArgument='<%# Eval("idCotizacion") %>' OnCommand="btnVerCotizacion_Command" />
-                                <span class="tooltip-text">Ver Detalles</span>
-                            </div>
 
-                            <div class="tooltip-container" style="display: inline-block;">
                                 <asp:LinkButton ID="btnEliminar" runat="server"
                                     CommandArgument='<%# Eval("idCotizacion") %>'
                                     CommandName="Eliminar"
                                     OnCommand="btnEliminar_Command"
                                     OnClientClick='<%# "return confirmarEliminacion(" + Eval("idCotizacion") + ");" %>'
-                                    CssClass="btn-admin btn-eliminar">🗑</asp:LinkButton>
-                                <span class="tooltip-text">Eliminar Trabajo</span>
-                            </div>
-
-
-
-
+                                    CssClass="btn-admin btn-eliminar">🗑 Eliminar</asp:LinkButton>
                         </div>
                     </td>
-
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
@@ -89,8 +80,7 @@
         </div>
     </div>
 
-    
-    
+
 
     <!-- js -->
     <asp:ScriptManager ID="ScriptManager1" runat="server" />

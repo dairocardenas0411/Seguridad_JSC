@@ -69,7 +69,6 @@
     display: flex;
     justify-content: flex-end;
     margin-bottom: 30px;
-    position: sticky;
     top: 20px;
     z-index: 100;
     animation: slideInRight 1s ease-out 0.6s both;
@@ -1045,3 +1044,513 @@
         --border-color: #475569;
     }
 }
+
+
+
+
+/* ===== MODAL DE PRODUCTOS - ESTILOS PROFESIONALES ===== */
+/* Variables CSS para consistencia y fácil mantenimiento */
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --dark-color: #1f2937;
+    --light-color: #f8fafc;
+    --border-radius: 12px;
+    --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-dark: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+}
+
+/* Modal backdrop con efecto blur */
+.modal-backdrop {
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Contenedor principal del modal */
+#modalProductos .modal-dialog {
+    max-width: 1200px;
+    margin: 1rem auto;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+#modalProductos.show .modal-dialog {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Contenido del modal */
+#modalProductos .modal-content {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    background: white;
+}
+
+/* Header del modal con gradiente */
+#modalProductos .modal-header {
+    background: var(--gradient-dark);
+    border-bottom: none;
+    padding: 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+    #modalProductos .modal-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+        pointer-events: none;
+    }
+
+#modalProductos .modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 1;
+}
+
+    #modalProductos .modal-title i {
+        font-size: 1.25rem;
+        opacity: 0.9;
+    }
+
+#modalProductos .btn-close {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: var(--transition);
+    position: relative;
+    z-index: 1;
+}
+
+    #modalProductos .btn-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(90deg) scale(1.1);
+    }
+
+/* Body del modal */
+#modalProductos .modal-body {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 400px;
+}
+
+/* Formulario de agregar productos */
+#modalProductos .row.g-3 {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Labels estilizados */
+#modalProductos .form-label {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Select y inputs mejorados */
+#modalProductos .form-select,
+#modalProductos .form-control {
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    background: white;
+}
+
+    #modalProductos .form-select:focus,
+    #modalProductos .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        outline: none;
+        transform: translateY(-1px);
+    }
+
+    #modalProductos .form-select:hover,
+    #modalProductos .form-control:hover {
+        border-color: #cbd5e1;
+        transform: translateY(-1px);
+    }
+
+/* Botón agregar producto */
+#modalProductos #BtnAgregarProducto {
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+    #modalProductos #BtnAgregarProducto::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.6s;
+    }
+
+    #modalProductos #BtnAgregarProducto:hover::before {
+        left: 100%;
+    }
+
+    #modalProductos #BtnAgregarProducto:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
+    }
+
+    #modalProductos #BtnAgregarProducto:active {
+        transform: translateY(0);
+    }
+
+/* GridView estilizado */
+#modalProductos .table {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    border: none;
+    margin-bottom: 0;
+}
+
+    #modalProductos .table thead th {
+        background: var(--gradient-primary);
+        color: white;
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 1rem;
+        border: none;
+        position: relative;
+    }
+
+    #modalProductos .table tbody td {
+        padding: 1rem;
+        vertical-align: middle;
+        border-bottom: 1px solid #f1f5f9;
+        transition: var(--transition);
+    }
+
+    #modalProductos .table tbody tr {
+        transition: var(--transition);
+    }
+
+        #modalProductos .table tbody tr:hover {
+            background: linear-gradient(90deg, #f8fafc, #e2e8f0);
+            transform: scale(1.01);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    /* Imágenes de productos */
+    #modalProductos .table img {
+        border-radius: 12px;
+        transition: var(--transition);
+        border: 3px solid transparent;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        #modalProductos .table img:hover {
+            transform: scale(1.1) rotate(2deg);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+/* Botón eliminar */
+#modalProductos .btn-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+    #modalProductos .btn-danger::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.6s;
+    }
+
+    #modalProductos .btn-danger:hover::before {
+        left: 100%;
+    }
+
+    #modalProductos .btn-danger:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
+    }
+
+/* Footer del modal */
+#modalProductos .modal-footer {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+}
+
+/* Botón guardar cambios */
+#modalProductos .btn-acpetar {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+    #modalProductos .btn-acpetar::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.6s;
+    }
+
+    #modalProductos .btn-acpetar:hover::before {
+        left: 100%;
+    }
+
+    #modalProductos .btn-acpetar:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(16, 185, 129, 0.3);
+    }
+
+/* Botón cerrar */
+#modalProductos .btn-secondary {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 6px rgba(107, 114, 128, 0.2);
+}
+
+    #modalProductos .btn-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(107, 114, 128, 0.3);
+    }
+
+/* Animaciones de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#modalProductos.show .modal-body > * {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+    #modalProductos.show .modal-body > *:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #modalProductos .modal-dialog {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+
+    #modalProductos .modal-header,
+    #modalProductos .modal-body,
+    #modalProductos .modal-footer {
+        padding: 1rem;
+    }
+
+    #modalProductos .modal-title {
+        font-size: 1.25rem;
+    }
+
+    #modalProductos .row.g-3 {
+        padding: 1rem;
+    }
+
+    #modalProductos .table {
+        font-size: 0.875rem;
+    }
+
+        #modalProductos .table img {
+            width: 60px;
+            height: 60px;
+        }
+
+    #modalProductos .modal-footer {
+        flex-direction: column;
+    }
+
+        #modalProductos .modal-footer .btn {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+}
+
+@media (max-width: 576px) {
+    #modalProductos .col-md-6,
+    #modalProductos .col-md-3 {
+        margin-bottom: 1rem;
+    }
+
+    #modalProductos .table thead {
+        display: none;
+    }
+
+    #modalProductos .table tbody td {
+        display: block;
+        padding: 0.5rem;
+        border: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+        #modalProductos .table tbody td:first-child {
+            padding-top: 1rem;
+        }
+
+        #modalProductos .table tbody td:last-child {
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #e2e8f0;
+        }
+
+    #modalProductos .table tbody tr {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        display: block;
+    }
+}
+
+/* Estados de carga */
+.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+    .loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin: -10px 0 0 -10px;
+        border: 2px solid var(--primary-color);
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Efectos de micro-interacciones */
+#modalProductos .form-control:focus + .form-label,
+#modalProductos .form-select:focus + .form-label {
+    color: var(--primary-color);
+    transform: scale(0.95);
+}
+
+/* Tooltips personalizados */
+[data-tooltip] {
+    position: relative;
+}
+
+    [data-tooltip]:hover::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--dark-color);
+        color: white;
+        padding: 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        z-index: 1000;
+    }
+
+/* Scrollbar personalizada */
+#modalProductos .modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+#modalProductos .modal-body::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+#modalProductos .modal-body::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+    #modalProductos .modal-body::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-hover);
+    }

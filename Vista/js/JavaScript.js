@@ -39,6 +39,7 @@ function filtrarTabla() {
     var filter = input.value.toLowerCase();
     var table = document.getElementById("tablaCotizaciones");
     var trs = table.getElementsByTagName("tr");
+    var visibleCount = 0;
 
     for (var i = 1; i < trs.length; i++) {
         var tds = trs[i].getElementsByTagName("td");
@@ -51,9 +52,69 @@ function filtrarTabla() {
             }
         }
 
-        trs[i].style.display = mostrar ? "" : "none";
+        if (mostrar) {
+            trs[i].style.display = "";
+            visibleCount++;
+            // Animación de entrada
+            trs[i].style.opacity = "0";
+            trs[i].style.transform = "translateY(20px)";
+            setTimeout(function (row) {
+                return function () {
+                    row.style.transition = "all 0.3s ease";
+                    row.style.opacity = "1";
+                    row.style.transform = "translateY(0)";
+                };
+            }(trs[i]), i * 50);
+        } else {
+            trs[i].style.display = "none";
+        }
+    }
+
+    // Mostrar mensaje si no hay resultados
+    mostrarMensajeBusqueda(visibleCount, filter);
+    actualizarIconoBusqueda(filter);
+}
+
+// Función para mostrar mensaje de búsqueda
+function mostrarMensajeBusqueda(count, filter) {
+    var existingMsg = document.getElementById("noResultsMessage");
+    if (existingMsg) {
+        existingMsg.remove();
+    }
+
+    if (count === 0 && filter.length > 0) {
+        var tableContainer = document.querySelector(".table-container");
+        var message = document.createElement("div");
+        message.id = "noResultsMessage";
+        message.className = "no-results";
+        message.innerHTML = `
+                    <i class="fas fa-search"></i>
+                    <h3>No se encontraron resultados</h3>
+                    <p>No hay Resultados que coincidan con "${filter}"</p>
+                    <small>Intenta con otros términos de búsqueda</small>
+                `;
+        tableContainer.appendChild(message);
     }
 }
+// Función para actualizar icono de búsqueda
+function actualizarIconoBusqueda(filter) {
+    var icon = document.getElementById('searchIcon');
+    if (filter.length > 0) {
+        icon.className = 'fas fa-times';
+        icon.style.cursor = 'pointer';
+        icon.style.color = '#e74c3c';
+        icon.onclick = function () {
+            document.getElementById('searchInput').value = '';
+            filtrarTabla();
+        };
+    } else {
+        icon.className = 'fas fa-search';
+        icon.style.cursor = 'default';
+        icon.style.color = '#667eea';
+        icon.onclick = null;
+    }
+}
+
 
 
 
