@@ -1,7 +1,36 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\vista\\perfil.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\perfil.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\vista\\master.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\master.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\vista\\listacotizaciones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\listacotizaciones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\vista\\historialtrabajo.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\historialtrabajo.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\vista\\historialtrabajo.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:vista\\historialtrabajo.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\logica\\clcotizacionl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:logica\\clcotizacionl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|c:\\users\\dairo\\source\\repos\\seguridad jsc\\datos\\clcotizaciond.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5691D9B3-52CD-469F-BD9B-DF56D392EAB0}|Seguridad JSC.csproj|solutionrelative:datos\\clcotizaciond.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 379,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,6 +51,118 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Perfil.aspx",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\Perfil.aspx",
+              "RelativeDocumentMoniker": "Vista\\Perfil.aspx",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\Perfil.aspx",
+              "RelativeToolTip": "Vista\\Perfil.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-07-04T01:50:49.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ClCotizacionL.cs",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Logica\\ClCotizacionL.cs",
+              "RelativeDocumentMoniker": "Logica\\ClCotizacionL.cs",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Logica\\ClCotizacionL.cs",
+              "RelativeToolTip": "Logica\\ClCotizacionL.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T01:08:23.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ClCotizacionD.cs",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Datos\\ClCotizacionD.cs",
+              "RelativeDocumentMoniker": "Datos\\ClCotizacionD.cs",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Datos\\ClCotizacionD.cs",
+              "RelativeToolTip": "Datos\\ClCotizacionD.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAcwFUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T01:06:22.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ListaCotizaciones.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\ListaCotizaciones.aspx.cs",
+              "RelativeDocumentMoniker": "Vista\\ListaCotizaciones.aspx.cs",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\ListaCotizaciones.aspx.cs",
+              "RelativeToolTip": "Vista\\ListaCotizaciones.aspx.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T00:32:10.341Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HistorialTrabajo.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\HistorialTrabajo.aspx.cs",
+              "RelativeDocumentMoniker": "Vista\\HistorialTrabajo.aspx.cs",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\HistorialTrabajo.aspx.cs",
+              "RelativeToolTip": "Vista\\HistorialTrabajo.aspx.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAzwBIAAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T23:32:02.886Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HistorialTrabajo.aspx",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\HistorialTrabajo.aspx",
+              "RelativeDocumentMoniker": "Vista\\HistorialTrabajo.aspx",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\HistorialTrabajo.aspx",
+              "RelativeToolTip": "Vista\\HistorialTrabajo.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-07-03T23:21:11.705Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "b6c9a933-dd67-425d-9e51-737bb34f2a86",
+        "Display": 1,
+        "X": -65,
+        "Y": 110,
+        "Width": 1267,
+        "Height": 669,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Master.Master",
+              "DocumentMoniker": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\Master.Master",
+              "RelativeDocumentMoniker": "Vista\\Master.Master",
+              "ToolTip": "C:\\Users\\dairo\\source\\repos\\Seguridad JSC\\Vista\\Master.Master",
+              "RelativeToolTip": "Vista\\Master.Master",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-07-03T23:39:26.997Z",
+              "EditorCaption": ""
             }
           ]
         }

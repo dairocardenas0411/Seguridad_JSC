@@ -31,17 +31,17 @@
                 <asp:Button
                     ID="btnAceptar"
                     runat="server"
-                    Text="✅ Aceptar"
+                    Text="✅ Confirmar Etapa"
                     CssClass="btn-acpetar"
                     CommandArgument='<%# Eval("idCotizacion") %>'
                     OnCommand="btnAceptar_Command"
-                    Visible='<%# Eval("estado").ToString() == "Pendiente" && !EsTecnico %>' />
+                    Visible='<%# (Eval("estado").ToString() == "Pendiente" || Eval("estado").ToString() == "En Progreso") && !EsTecnico %>'  />
 
 
                 <asp:Button ID="bntEliminar" runat="server" Text="🗑 Eliminar"
                     CssClass="btn-eliminar" CommandName="Eliminar"
                     CommandArgument='<%# Eval("idCotizacion") %>' OnCommand="btnEliminar_Command"
-                    Visible='<%# !EsTecnico %>' />
+                    Visible='<%# (Eval("estado").ToString() == "Pendiente" || Eval("estado").ToString() == "En Progreso") && !EsTecnico %>' />
 
                 <asp:Button ID="btnImprimir" runat="server" Text="🖨️ Imprimir"
                     CssClass="btn-imprimir" OnClientClick="imprimirSeccion(); return false;" />
@@ -50,7 +50,7 @@
                     CssClass="btn-actualizar"
                     CommandArgument='<%# Eval("idCotizacion") %>'
                     OnCommand="btnAbrirModal_Command"
-                    Visible='<%# !EsTecnico %>' />
+                     Visible='<%# (Eval("estado").ToString() == "Pendiente" || Eval("estado").ToString() == "En Progreso") && !EsTecnico %>' />
 
                 <asp:Button ID="btnAbrirModalProductos" runat="server" Text="🧾 Ver / Editar Productos"
                     CssClass="btn-actualizar"
@@ -381,14 +381,14 @@
             </div>
         </div>
     </div>
-   
+
     <!-- Modal Productos -->
     <div class="modal fade" id="modalProductos" tabindex="-1" aria-labelledby="modalProductosLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title" id="modalProductosLabel"><i class="fas fa-boxes"></i>Productos Seleccionados</h5>
-                    <button type="button" style=color:white; class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar">X</button>
+                    <button type="button" style="color: white;" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar">X</button>
                 </div>
                 <div class="modal-body">
                     <asp:UpdatePanel ID="UpdatePanelModalProductos" runat="server">

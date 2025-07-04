@@ -21,15 +21,19 @@ namespace Seguridad_JSC.Logica
             return oDatos.MtdRegistroCotizacion(oCotizacion);
         }
 
-
-
-
         public List<ClCotizacionE> MtdListarCotizacionPendiente()
         {
             ClCotizacionD oDatos = new ClCotizacionD();
             List<ClCotizacionE> listaCotizacion = oDatos.MtdListadCotizacionPendiente();
             return listaCotizacion;
         }
+
+        public List<ClCotizacionE> MtdListaHistorial(bool verTodo = false)
+        {
+            ClCotizacionD datos = new ClCotizacionD();
+            return datos.MtdHistorialTrabajo(verTodo);
+        }
+
 
         public List<ClCotizacionE> MtdListarTrabajo()
         {
@@ -47,6 +51,7 @@ namespace Seguridad_JSC.Logica
             return datosProducto.MtdInfoProducto(idCotizacion);
 
         }
+        
         public DataTable ObtenerDatosCotizacion(int idCotizacion)
         {
             if (idCotizacion <= 0)
@@ -64,11 +69,13 @@ namespace Seguridad_JSC.Logica
             bool resultado = oDatos.MtdActualizarTrabajo(trabajo);
             return resultado;
         }
+        
         public DataTable MtdListaTrabajoTecnico(int idUsuarioT)
         {
             ClCotizacionD oDatos = new ClCotizacionD();
             return oDatos.MtdListaTrabajoTecnico(idUsuarioT);
         }
+
         public bool MtdActualizarProductosCotizacion(int idCotizacion, List<ProductoCotizacion> productos)
         {
             if (productos == null || productos.Count == 0)

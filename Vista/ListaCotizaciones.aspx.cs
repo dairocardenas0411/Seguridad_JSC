@@ -26,7 +26,7 @@ namespace Seguridad_JSC.Vista
             }
             else
             {
-                Response.Redirect("index.aspx");
+                Response.Redirect("../index.aspx");
             }
 
             // Capturar postback por __doPostBack

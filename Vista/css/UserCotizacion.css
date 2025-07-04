@@ -617,3 +617,29 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
+
+
+.btnVerTodoPersonalizado {
+    background-color: #0D3336;
+    color: white;
+    border: 2px solid white;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+    .btnVerTodoPersonalizado:hover {
+        background-color: #13494d;
+        transform: scale(1.03);
+        box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+    }
+
+    .btnVerTodoPersonalizado:active {
+        transform: scale(0.97);
+        box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+    }

@@ -100,7 +100,7 @@
                             <a href="RegistroTrabajo.aspx" class="list-group-item list-group-item-action">
                                 <i class="fas fa-plus-circle mr-2"></i>Nuevo Trabajo
                             </a>
-                            <a href="HistorialCotizaciones.aspx" class="list-group-item list-group-item-action">
+                            <a href="HistorialTrabajo.aspx" class="list-group-item list-group-item-action">
                                 <i class="fas fa-history mr-2"></i>Historial
                             </a>
                         </div>

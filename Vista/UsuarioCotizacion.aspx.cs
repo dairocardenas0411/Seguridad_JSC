@@ -96,6 +96,7 @@ namespace Seguridad_JSC.Vista
                 LlenarDatosModal(dt.Rows[0]);
             }
         }
+        
         private void CargarDatosProducto(int idCotizacion)
         {
             ClCotizacionL TrabajoLogica = new ClCotizacionL();
@@ -118,7 +119,6 @@ namespace Seguridad_JSC.Vista
                    "Swal.fire('Sin datos', 'No se encontraron Productos para esta cotización.', 'info');", true);
             }
         }
-
 
         protected void btnEliminar_Command(object sender, CommandEventArgs e)
         {
@@ -146,7 +146,6 @@ namespace Seguridad_JSC.Vista
                 }
             }
         }
-
 
         private bool EliminarCotizacion(int idCotizacion)
         {
@@ -191,31 +190,30 @@ namespace Seguridad_JSC.Vista
                     if (!string.IsNullOrEmpty(errorStock))
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
-                            "Swal.fire('Stock insuficiente', 'No puedes aceptar la cotización porque el stock es insuficiente.', 'warning');", true);
+                            "Swal.fire('Stock insuficiente', 'No puedes aceptar el Trabajo porque el stock es insuficiente.', 'warning');", true);
                         return;
                     }
 
                     if (resultado)
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
-                            "Swal.fire('¡Aceptada!', 'La cotización ha sido aceptada correctamente.', 'success');", true);
+                            "Swal.fire('¡Finalizada!', 'El Trabajo ha sido Actualizada correctamente.', 'success');", true);
                         CargarTrabajo(idCotizacion);
                         CargarDatosProducto(idCotizacion);
                     }
                     else
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
-                            "Swal.fire('Error', 'No se pudo aceptar la cotización.', 'error');", true);
+                            "Swal.fire('Error', 'No se pudo Actualizar el Trabajo.', 'error');", true);
                     }
                 }
                 catch (Exception ex)
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
-                        $"Swal.fire('Error', 'Ocurrió un error al aceptar la cotización: {ex.Message}', 'error');", true);
+                        $"Swal.fire('Error', 'Ocurrió un error al aceptar el Trabajo: {ex.Message}', 'error');", true);
                 }
             }
         }
-
 
         public bool EsTecnico
         {
@@ -265,7 +263,6 @@ namespace Seguridad_JSC.Vista
             }
         }
 
-
         private void CargarTecnicos()
         {
             try
@@ -294,7 +291,6 @@ namespace Seguridad_JSC.Vista
 
         }
 
-
         protected void btnAbrirModal_Command(object sender, CommandEventArgs e)
         {
             if (int.TryParse(e.CommandArgument.ToString(), out int idCotizacion))
@@ -320,7 +316,6 @@ namespace Seguridad_JSC.Vista
 
             }
         }
-
 
         protected void btnActualizar_Command(object sender, CommandEventArgs e)
         {
@@ -395,6 +390,7 @@ namespace Seguridad_JSC.Vista
                     $"Swal.fire('Error', '{ex.Message}', 'error');", true);
             }
         }
+
         protected void btnAbrirModalProductos_Command(object sender, CommandEventArgs e)
         {
             if (int.TryParse(e.CommandArgument.ToString(), out int idCotizacion))
@@ -432,13 +428,12 @@ namespace Seguridad_JSC.Vista
             ddlListaProductos.DataBind();
             ddlListaProductos.Items.Insert(0, new ListItem("-- Seleccione un producto --", "0"));
         }
+
         private void CargarGridProductosModal()
         {
             gvProductosCotizacion.DataSource = ProductosSeleccionados;
             gvProductosCotizacion.DataBind();
         }
-
-
 
         private void CargarProductosAsociados(int idCotizacion)
         {
@@ -462,8 +457,6 @@ namespace Seguridad_JSC.Vista
 
             ProductosSeleccionados = productos;
         }
-
-
 
         protected void BtnAgregarProducto_Click(object sender, EventArgs e)
         {
@@ -508,8 +501,6 @@ namespace Seguridad_JSC.Vista
             CargarGridProductosModal();
         }
 
-
-
         protected void gvProductosCotizacion_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Eliminar")
@@ -528,13 +519,12 @@ namespace Seguridad_JSC.Vista
             }
         }
 
-
-
         private void MostrarAlerta(string titulo, string mensaje, string icono)
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "alerta",
                 $"Swal.fire('{titulo}', '{mensaje}', '{icono}');", true);
         }
+        
         protected void btnActualizarProductos_Click(object sender, EventArgs e)
         {
             try
@@ -579,8 +569,6 @@ namespace Seguridad_JSC.Vista
                 MostrarAlerta("Error", "Ocurrió un error al actualizar: " + ex.Message, "error");
             }
         }
-
-
 
         private List<ProductoCotizacionTemp> ProductosSeleccionados
         {

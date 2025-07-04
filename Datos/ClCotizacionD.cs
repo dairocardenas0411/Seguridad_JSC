@@ -84,6 +84,64 @@ namespace Seguridad_JSC.Datos
             return idGenerado;
         }
 
+        public List<ClCotizacionE> MtdHistorialTrabajo(bool verTodo = false)
+        {
+            List<ClCotizacionE> listaHistorialTrabajo = new List<ClCotizacionE>();
+            ClConexion conexion = new ClConexion();
+
+            try
+            {
+                SqlConnection sqlconnection = conexion.MtdAbrirConexion();
+                using (SqlCommand cmd = new SqlCommand("sp_ListaTrabajoFinalizado", sqlconnection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@VerTodo", verTodo);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dtListaHistorialTrabajo = new DataTable();
+                        adapter.Fill(dtListaHistorialTrabajo);
+
+                        if (dtListaHistorialTrabajo.Rows.Count > 0)
+                        {
+                            foreach (DataRow filas in dtListaHistorialTrabajo.Rows)
+                            {
+                                listaHistorialTrabajo.Add(new ClCotizacionE
+                                {
+                                    idCotizacion = int.Parse(filas["idCotizacion"].ToString()),
+                                    nombreCliente = filas["nombreCliente"].ToString(),
+                                    apellidoCliente = filas["apellidoCliente"].ToString(),
+                                    documento = int.Parse(filas["documento"].ToString()),
+                                    telefono = filas["telefono"].ToString(),
+                                    email = filas["email"].ToString(),
+                                    direccionInstalacion = filas["direccionInstalacion"].ToString(),
+                                    estado = filas["estado"].ToString(),
+                                    fechaCotizacion = Convert.ToDateTime(filas["fechaCotizacion"]),
+                                    observaciones = filas["observaciones"].ToString(),
+                                    validacion = true
+                                });
+                            }
+                        }
+                        else
+                        {
+                            listaHistorialTrabajo.Add(new ClCotizacionE { validacion = false });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en el Historial: " + ex.Message);
+            }
+            finally
+            {
+                conexion?.MtdcerrarConexion();
+            }
+
+            return listaHistorialTrabajo;
+        }
+
+
 
         public List<ClCotizacionE> MtdListaTrabajoProgreso()
         {
@@ -144,6 +202,7 @@ namespace Seguridad_JSC.Datos
             }
             return listaTrabajo;
         }
+
         public List<ClCotizacionE> MtdListadCotizacionPendiente()
         {
             List<ClCotizacionE> listaCotizacionPendiente = new List<ClCotizacionE>();
@@ -218,6 +277,7 @@ namespace Seguridad_JSC.Datos
             Conex.MtdcerrarConexion();
             return dtlListaDatos;
         }
+
         public DataTable MtdInfoCotizacion(int idCotizacion)
         {
             ClConexion conex = new ClConexion();
@@ -240,7 +300,6 @@ namespace Seguridad_JSC.Datos
             conex.MtdcerrarConexion();  
             return dtlListaDatos;
         }
-
 
         public bool MtdActualizarTrabajo(ClCotizacionE trabajo)
         {
@@ -283,8 +342,6 @@ namespace Seguridad_JSC.Datos
             }
             return resultado;
         }
-
-
 
         public DataTable MtdListaTrabajoTecnico(int idTecnico)
         {

@@ -75,6 +75,7 @@
     <Content Include="Vista\css\ListaUsuarios.css" />
     <Content Include="Vista\css\Perfil.css" />
     <Content Include="Vista\css\ProductosProveedor.css" />
+    <Content Include="Vista\HistorialTrabajo.aspx" />
     <Content Include="Vista\Instalacion.aspx" />
     <Content Include="Vista\js\JavaScript.js" />
     <Content Include="Vista\js\jsCotizacion.js" />
@@ -166,6 +167,13 @@
     </Compile>
     <Compile Include="Vista\DashboardAdmin.aspx.designer.cs">
       <DependentUpon>DashboardAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\HistorialTrabajo.aspx.cs">
+      <DependentUpon>HistorialTrabajo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\HistorialTrabajo.aspx.designer.cs">
+      <DependentUpon>HistorialTrabajo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Instalacion.aspx.cs">
       <DependentUpon>Instalacion.aspx</DependentUpon>
